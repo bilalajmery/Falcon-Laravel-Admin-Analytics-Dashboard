@@ -4,7 +4,7 @@
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarDoubleTop" aria-controls="navbarDoubleTop" aria-expanded="false" aria-label="Toggle Navigation"><span
                     class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-            <a class="navbar-brand me-1 me-sm-3" href="index.html">
+            <a class="navbar-brand me-1 me-sm-3" href="/">
                 <div class="d-flex align-items-center"><img class="me-2" src="/assets/img/icons/spot-illustrations/falcon.png" alt=""
                         width="40" /><span class="font-sans-serif text-primary">Admin</span></div>
             </a>
@@ -486,13 +486,14 @@
 
                 <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
+                <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
 
                 {{-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" id="dashboards">Dashboard</a>
                     <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0" aria-labelledby="dashboards">
                         <div class="bg-white dark__bg-1000 rounded-3 py-2"><a class="dropdown-item link-600 fw-medium"
-                                href="index.html">Default</a><a class="dropdown-item link-600 fw-medium"
+                                href="/">Default</a><a class="dropdown-item link-600 fw-medium"
                                 href="dashboard/analytics.html">Analytics</a><a class="dropdown-item link-600 fw-medium"
                                 href="dashboard/crm.html">CRM</a><a class="dropdown-item link-600 fw-medium" href="dashboard/e-commerce.html">E
                                 commerce</a><a class="dropdown-item link-600 fw-medium" href="dashboard/lms.html">LMS<span
@@ -962,7 +963,7 @@
         <div class="toggle-icon-wrapper">
             <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left"
                 title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-        </div><a class="navbar-brand" href="index.html">
+        </div><a class="navbar-brand" href="/">
             <div class="d-flex align-items-center py-3"><img class="me-2" src="/assets/img/icons/spot-illustrations/falcon.png" alt=""
                     width="40" /><span class="font-sans-serif text-primary">Admin</span></div>
         </a>
@@ -981,6 +982,7 @@
                         </div>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/admin" role="button">
                         <div class="d-flex align-items-center">
@@ -988,6 +990,17 @@
                                 <i class="fas fa-user-shield"></i>
                             </span>
                             <span class="nav-link-text ps-1">Admins</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/setting" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <i class="fa fa-cog"></i>
+                            </span>
+                            <span class="nav-link-text ps-1">Setting</span>
                         </div>
                     </a>
                 </li>
@@ -1001,7 +1014,7 @@
                                 class="nav-link-text ps-1">Dashboard</span></div>
                     </a>
                     <ul class="nav collapse show" id="dashboard">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">
+                        <li class="nav-item"><a class="nav-link active" href="/">
                                 <div class="d-flex align-items-center"><span
                                         class="nav-link-text ps-1">Default</span></div>
                             </a><!-- more inner pages--></li>
@@ -2427,7 +2440,7 @@
     <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarStandard" aria-controls="navbarStandard" aria-expanded="false" aria-label="Toggle Navigation"><span
             class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-    <a class="navbar-brand me-1 me-sm-3" href="index.html">
+    <a class="navbar-brand me-1 me-sm-3" href="/">
         <div class="d-flex align-items-center"><img class="me-2" src="/assets/img/icons/spot-illustrations/falcon.png" alt=""
                 width="40" /><span class="font-sans-serif text-primary">Admin</span></div>
     </a>
@@ -2436,6 +2449,7 @@
 
             <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
+            <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
 
             {{-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"

@@ -83,7 +83,7 @@
                                 <div class="card-body p-4">
                                     <div class="row flex-between-center">
                                         <div class="col-auto">
-                                            <h3>Login</h3>
+                                            <h4>Let's Find Your Account</h4>
                                         </div>
                                     </div>
                                     <form onsubmit="submitForm(event)">
@@ -94,26 +94,10 @@
                                                     <label for="floatingInput">Email</label>
                                                 </div>
                                             </div>
-
-                                            <div class="col-12">
-                                                <div class="form-floating mb-3">
-                                                    <input class="form-control" type="password" placeholder="*******" name="password" />
-                                                    <label for="floatingInput">Password</label>
-                                                </div>
-                                            </div>
                                         </div>
 
-                                        <div class="row flex-between-center">
-                                            <div class="col-auto">
-                                                <div class="form-check mb-0">
-                                                    <input class="form-check-input" type="checkbox" id="split-checkbox" name="rememberMe" />
-                                                    <label class="form-check-label mb-0" for="split-checkbox">Remember me</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto"><a class="fs-10" href="/forgot">Forgot Password?</a></div>
-                                        </div>
                                         <div class="mb-3">
-                                            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Log in</button>
+                                            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Find</button>
                                         </div>
                                     </form>
                                 </div>
@@ -266,7 +250,7 @@
 
             $.ajax({
                     method: 'POST',
-                    url: '/login',
+                    url: '/forgot',
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -283,12 +267,9 @@
                 })
                 .done(function(response) {
                     if (!response.error) {
+
                         createToast('success', response.message);
-                        if (!response.twoStepVerification) {
-                            location.assign("/home");
-                        }else{
-                            location.assign(`/twoStepVerification/${response.uid}`);
-                        }
+                        location.assign(`/forgot/${response.uid}`);
 
                     } else {
                         createToast('error', response.message);

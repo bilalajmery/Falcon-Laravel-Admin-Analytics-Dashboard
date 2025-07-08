@@ -13,12 +13,17 @@ Route::group(['middleware' => ['alreadyLogin', 'preventBackHistory', 'rememberMe
     Route::post('login', [authController::class, 'login']);
     Route::get('logout', [authController::class, 'logout']);
 
-    Route::get('register', [authController::class, 'registerIndex']);
-    Route::post('register', [authController::class, 'register']);
-
     Route::get('twoStepVerification/{UID}', [authController::class, 'twoStepVerificationIndex']);
     Route::post('twoStepVerification', [authController::class, 'twoStepVerification']);
     Route::get('otpResend/{UID}', [authController::class, 'otpResend']);
+
+    Route::get('forgot', [authController::class, 'forgotIndex']);
+    Route::post('forgot', [authController::class, 'find']);
+    Route::get('forgot/{UID}', [authController::class, 'verificationIndex']);
+    Route::post('forgot/verification', [authController::class, 'verification']);
+    Route::get('change-password/{UID}', [authController::class, 'changePasswordIndex']);
+    Route::post('change-password', [authController::class, 'changePassword']);
+
 });
 
 Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHistory', 'storeRequestLogs']], function () {

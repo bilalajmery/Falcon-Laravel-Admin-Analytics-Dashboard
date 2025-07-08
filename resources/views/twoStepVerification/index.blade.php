@@ -70,7 +70,7 @@
                         <div class="col-lg-9 col-xl-8 col-xxl-6">
                             <div class="card">
                                 <div class="card-header bg-circle-shape bg-shape text-center p-2"><a
-                                        class="font-sans-serif fw-bolder fs-5 z-1 position-relative link-light" href="../../../index.html"
+                                        class="font-sans-serif fw-bolder fs-5 z-1 position-relative link-light" href="../../..//"
                                         data-bs-theme="light">Two Step Verification</a></div>
                                 <div class="card-body p-4">
                                     <div class="row flex-between-center">

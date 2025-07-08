@@ -156,4 +156,107 @@ class authController extends commonFunction
             return $this->tryCatchResponse($th);
         }
     }
+
+    public function forgotIndex()
+    {
+        try {
+
+            return view('forgot.index');
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function find(Request $request)
+    {
+        try {
+
+            $request->validate([
+                'email' => 'required|email',
+            ]);
+
+            $admin = Admin::where('email', $request->email)->first();
+
+            if (!$admin) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Account Not Found.',
+                ], 404);
+            }
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Account Found Successfully.',
+                'uid' => $admin->uid,
+            ]);
+
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function verificationIndex($uid)
+    {
+        try {
+
+            return view('forgot.verification', ['uid' => $uid]);
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function verification(Request $request)
+    {
+        try {
+
+            $admin = Admin::where([['uid', $request->uid], ['otp', $request->otp]])->first();
+            if (!$admin) {
+
+                return response()->json(['error' => true, 'message' => 'Invalid OTP']);
+
+            } else {
+
+                $admin->otp = 0;
+                $admin->save();
+
+                return response()->json(['error' => false, 'message' => 'Verified Successfully']);
+
+            }
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function changePasswordIndex($uid)
+    {
+        try {
+
+            return view('forgot.password', ['uid' => $uid]);
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function changePassword(Request $request)
+    {
+        try {
+
+            $admin = Admin::where([['uid', $request->uid]])->first();
+            if (!$admin) {
+
+                return response()->json(['error' => true, 'message' => 'Invalid Uid']);
+
+            } else {
+
+                $admin->password = hash::make($request->password);
+                $admin->save();
+
+                return response()->json(['error' => false, 'message' => 'Password Changed Successfully']);
+
+            }
+
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
 }
