@@ -52,8 +52,13 @@ class authController extends commonFunction
 
             // Check if account is disabled
             if ($admin->twoStepVerification) {
+                $otp = $this->generateOtp();
+                $sendOtp = $this->sendOtp($otp, $admin);
+                if (isset($sendOtp['error'])) {
+                    return response()->json(['error' => true, 'message' => $sendOtp['message']]);
+                }
 
-                $admin->otp = $this->generateOtp();
+                $admin->otp = $otp;
                 $admin->save();
 
                 return response()->json([
@@ -149,8 +154,16 @@ class authController extends commonFunction
             if (!$admin) {
                 return response()->json(['error' => true, 'message' => 'Account Not Found']);
             } else {
-                $admin->otp = $this->generateOtp();
+
+                $otp = $this->generateOtp();
+                $sendOtp = $this->sendOtp($otp, $admin);
+                if (isset($sendOtp['error'])) {
+                    return response()->json(['error' => true, 'message' => $sendOtp['message']]);
+                }
+
+                $admin->otp = $otp;
                 $admin->save();
+
                 return response()->json(['error' => false, 'message' => 'OTP Resend Successfully']);
             }
 
@@ -185,6 +198,15 @@ class authController extends commonFunction
                     'message' => 'Account Not Found.',
                 ], 404);
             }
+
+            $otp = $this->generateOtp();
+            $sendOtp = $this->sendOtp($otp, $admin);
+            if (isset($sendOtp['error'])) {
+                return response()->json(['error' => true, 'message' => $sendOtp['message']]);
+            }
+
+            $admin->otp = $otp;
+            $admin->save();
 
             return response()->json([
                 'error' => false,

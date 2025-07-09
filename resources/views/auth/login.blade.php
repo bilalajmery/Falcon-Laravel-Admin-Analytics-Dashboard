@@ -113,7 +113,7 @@
                                             <div class="col-auto"><a class="fs-10" href="/forgot">Forgot Password?</a></div>
                                         </div>
                                         <div class="mb-3">
-                                            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Log in</button>
+                                            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit" id="formSubmitButton">Log in</button>
                                         </div>
                                     </form>
                                 </div>

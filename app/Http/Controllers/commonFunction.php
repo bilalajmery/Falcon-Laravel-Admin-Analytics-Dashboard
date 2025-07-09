@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
-use Carbon\Carbon;
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -64,35 +60,6 @@ class commonFunction extends Controller
         return (string) random_int(100000, 999999);
     }
 
-    public function sendOtpToUserEmail($user, $otp)
-    {
-        try {
-
-            $data = [
-                'otp' => $otp,
-                'name' => 'AVRP',
-                'description' => "Welcome to AVRP This One-Time Password  (OTP) Is Valid For One Time.",
-                'domain' => 'www.avrp.com',
-                'url' => 'https://avrp-website.ellipticals.website/',
-                'template' => 'D',
-                'subject' => 'Email Verification OTP',
-                'mailFrom' => 'no-reply@avrp.com',
-                'logo' => 'https://avrp-dashboard.ellipticals.website/commonAssets/logo.png',
-                'mailTo' => $user->email,
-                'userName' => $user->name,
-            ];
-
-            $response = Http::post('https://universal-otp-sender.ellipticals.website/api/otp', $data);
-            if ($response->failed()) {
-                return ['error' => true, 'message' => $response->json()];
-            }
-
-            return ['error' => false, 'message' => 'Email Send Successfully'];
-        } catch (\Throwable $th) {
-            return ['error' => false, 'message' => 'Email Send Successfully'];
-        }
-    }
-
     public function uIdGenerate()
     {
         return Str::uuid();
@@ -147,5 +114,35 @@ class commonFunction extends Controller
                 'message' => $th->getMessage(),
             ];
         }
+    }
+
+    public function sendOtp($otp, $user)
+    {
+        $response = Http::post('https://new-mail-sender.ellipticals.website/api/otp', [
+            'smtp_host' => env('MAIL_HOST'),
+            'smtp_port' => env('MAIL_PORT'),
+            'smtp_username' => env('MAIL_USERNAME'),
+            'smtp_password' => env('MAIL_PASSWORD'),
+            'from_email' => env('MAIL_FROM_ADDRESS'),
+            'from_name' => env('MAIL_FROM_NAME'),
+            'template' => 'test',
+            'subject' => 'Your One Time Password',
+            'otp' => $otp,
+            'email' => $user->email,
+            'name' => $user->name,
+            'companyName' => 'FALCON DASHBOARD',
+            'companyLogo' => 'https://static.vecteezy.com/system/resources/thumbnails/008/214/517/small_2x/abstract-geometric-logo-or-infinity-line-logo-for-your-company-free-vector.jpg',
+        ]);
+
+        if ($response->successful()) {
+            return [
+                'message' => 'OTP sent successfully',
+            ];
+        }
+
+        return [
+            'error' => true,
+            'message' => $response->json()['message'],
+        ];
     }
 }
