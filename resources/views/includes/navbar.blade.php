@@ -507,7 +507,7 @@
             <a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 <div class="avatar avatar-xl">
-                    <img class="rounded-circle" src="/assets/img/team/3-thumb.png" alt="" />
+                    <img class="rounded-circle" src="{{ Session::get('adminSession.profile') ?? asset('assets/img/elearning/avatar/student.png') }}" alt="" />
                 </div>
             </a>
             <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
@@ -919,7 +919,7 @@
             <a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-xl">
-                    <img class="rounded-circle" src="/assets/img/team/3-thumb.png" alt="" />
+                    <img class="rounded-circle" src="{{ Session::get('adminSession.profile') ?? asset('assets/img/elearning/avatar/student.png') }}" alt="" />
                 </div>
             </a>
             <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
