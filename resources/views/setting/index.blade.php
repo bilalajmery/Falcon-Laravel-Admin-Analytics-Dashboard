@@ -32,20 +32,21 @@
     <div class="col-12">
         <div class="card mb-3 btn-reveal-trigger">
             <div class="card-header position-relative min-vh-25 mb-8">
+
                 <div class="cover-image">
-                    <div class="bg-holder rounded-3 rounded-bottom-0" style="background-image:url(../../assets/img/generic/4.jpg);"></div>
-                    <!--/.bg-holder-->
-                    {{--
-                        <input class="d-none" id="upload-cover-image" type="file" />
-                        <label class="cover-image-file-input" for="upload-cover-image">
-                            <span class="fas fa-camera me-2"></span>
-                            <span>Change cover photo</span>
-                        </label>
-                    --}}
+                    <div id="coverPreview" class="bg-holder rounded-3 rounded-bottom-0" style="background-image: url('{{ Session::get('adminSession.cover') ?? '../../assets/img/generic/4.jpg' }}');"></div>
+
+                    <input class="d-none" id="upload-cover-image" type="file" />
+                    <label class="cover-image-file-input" for="upload-cover-image">
+                        <span class="fas fa-camera me-2"></span>
+                        <span>Change cover photo</span>
+                    </label>
                 </div>
+
                 <div class="avatar avatar-5xl avatar-profile shadow-sm img-thumbnail rounded-circle">
                     <div class="h-100 w-100 rounded-circle overflow-hidden position-relative">
-                        <img id="profilePreview" src="{{ Session::get('adminSession.profile') }}" width="200" alt="Profile" />
+                        <img id="profilePreview" src="{{ Session::get('adminSession.profile') ?? asset('assets/img/elearning/avatar/student.png') }}"
+                            width="200" alt="Profile" />
 
                         <input class="d-none" id="profile-image" type="file" accept="image/*" />
 
@@ -58,13 +59,13 @@
                     </div>
                 </div>
 
-
             </div>
         </div>
     </div>
 </div>
 <div class="row g-0">
     <div class="col-lg-8 pe-lg-2">
+
         <div class="card mb-3">
             <div class="card-header">
                 <h5 class="mb-0">Profile Settings</h5>
@@ -101,27 +102,28 @@
                 </form>
             </div>
         </div>
+
+        <div class="card mb-3" style="padding-bottom: 80px;">
+            <div class="card-header">
+                <h5 class="mb-0">Account Settings</h5>
+            </div>
+            <div class="card-body bg-body-tertiary">
+                <div class="form-check form-switch mb-0 lh-1">
+                    @if (Session::GET('adminSession.twoStepVerification'))
+                        <input class="form-check-input" type="checkbox" id="twoStepVerificationCheckBox" checked="checked" />
+                    @else
+                        <input class="form-check-input" type="checkbox" id="twoStepVerificationCheckBox" />
+                    @endif
+
+                    <label class="form-check-label mb-0" for="twoStepVerificationCheckBox">Two Step Verification</label>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="col-lg-4 ps-lg-2">
         <div class="sticky-sidebar">
-
-            <div class="card mb-3 overflow-hidden">
-                <div class="card-header">
-                    <h5 class="mb-0">Account Settings</h5>
-                </div>
-                <div class="card-body bg-body-tertiary">
-                    <div class="form-check form-switch mb-0 lh-1">
-                        @if (Session::GET('adminSession.twoStepVerification'))
-                            <input class="form-check-input" type="checkbox" id="twoStepVerificationCheckBox" checked="checked" />
-                        @else
-                            <input class="form-check-input" type="checkbox" id="twoStepVerificationCheckBox" />
-                        @endif
-
-                        <label class="form-check-label mb-0" for="twoStepVerificationCheckBox">Two Step Verification</label>
-                    </div>
-                </div>
-            </div>
 
             <div class="card mb-3">
                 <div class="card-header">
@@ -129,27 +131,28 @@
                 </div>
                 <div class="card-body bg-body-tertiary">
                     <form onsubmit="passwordForm(event)">
-                        <div class="mb-3">
-                            <label class="form-label" for="currentPassword">Current Password</label>
-                            <input class="form-control" id="currentPassword" type="password" name="currentPassword" />
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" id="currentPassword" placeholder="********" name="currentPassword" />
+                            <label for="currentPassword">Current Password</label>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="password">New Password</label>
-                            <input class="form-control" id="password" type="password" name="password" />
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" id="password" placeholder="********" name="password" />
+                            <label for="password">New Password</label>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="confirmPassword">Confirm Password</label>
-                            <input class="form-control" id="confirmPassword" type="password" name="confirmPassword" />
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" id="confirmPassword" placeholder="********" name="confirmPassword" />
+                            <label for="confirmPassword">Confirm Password</label>
                         </div>
+
                         <button class="btn btn-primary d-block w-100" type="submit" id="passwordSubmitButton">Change Password</button>
                     </form>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">Danger Zone</h5>
-                </div>
                 <div class="card-body bg-body-tertiary">
                     <h5 class="fs-9">Delete this account</h5>
                     <p class="fs-10">Once you delete a account, there is no going back. Please be certain.</p>
@@ -157,6 +160,7 @@
                         Account</a>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -346,6 +350,43 @@
             });
         });
     });
+
+    $(document).ready(function() {
+        $("#upload-cover-image").on("change", function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Preview cover image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $("#coverPreview").css("background-image", `url('${e.target.result}')`);
+            };
+            reader.readAsDataURL(file);
+
+            // Upload via AJAX
+            const formData = new FormData();
+            formData.append("cover", file);
+
+            $.ajax({
+                url: "/setting/cover", // Adjust to your Laravel route
+                method: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                success: function(response) {
+                    createToast('success', response.message || 'Cover photo updated');
+                },
+                error: function(xhr) {
+                    const error = xhr.responseJSON?.message || "Something went wrong";
+                    createToast('error', error);
+                }
+            });
+        });
+    });
+
 
     function deleteAccount(event) {
         event.preventDefault();

@@ -120,7 +120,7 @@
         </div>
 
         <div class="table-responsive scrollbar">
-            <table class="table table-striped overflow-hidden" id="adminTable">
+            <table class="table table-striped table-bordered overflow-hidden" id="adminTable">
                 <thead>
                     <tr class="btn-reveal-trigger">
                         <th scope="col">#</th>

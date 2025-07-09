@@ -35,6 +35,7 @@ class RememberMe
                         'name' => $admin->name,
                         'email' => $admin->email,
                         'profile' => $admin->profile,
+                        'cover' => $admin->cover,
                         'twoStepVerification' => $admin->twoStepVerification,
                         'phone' => $admin->phone,
                     ]);

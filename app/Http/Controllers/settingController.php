@@ -158,6 +158,48 @@ class settingController extends commonFunction
         }
     }
 
+    public function cover(Request $request)
+    {
+        try {
+            $uid = Session::get('adminSession.uid');
+            $admin = Admin::where('uid', $uid)->first();
+
+            if (!$admin) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Admin not found.',
+                ], 404);
+            }
+
+            $coverPath = null;
+            if ($request->hasFile('cover')) {
+                $response = $this->storeImage($request->file('cover'), 'uploads/admin/cover');
+
+                if (!empty($response['error'])) {
+                    return response()->json([
+                        'error' => true,
+                        'message' => $response['message'],
+                    ], 422);
+                }
+
+                $coverPath = $response['path'];
+            }
+
+            $coverPath ? $admin->cover = $coverPath : '';
+            $admin->save();
+
+            $coverPath ? Session::put('adminSession.cover', $coverPath) : '';
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Cover updated successfully.',
+            ]);
+
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
     public function accountDelete(Request $request)
     {
         try {

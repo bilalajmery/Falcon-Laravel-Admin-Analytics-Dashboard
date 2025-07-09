@@ -38,6 +38,7 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
     Route::post('setting/twoStepVerification', [settingController::class, 'twoStepVerification']);
     Route::post('setting/password', [settingController::class, 'password']);
     Route::post('setting/profile', [settingController::class, 'profile']);
+    Route::post('setting/cover', [settingController::class, 'cover']);
     Route::post('setting/accountDelete', [settingController::class, 'accountDelete']);
 
 });

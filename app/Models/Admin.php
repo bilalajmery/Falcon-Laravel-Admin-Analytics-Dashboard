@@ -23,6 +23,7 @@ class Admin extends Model
         'status',
         'password',
         'profile',
+        'cover',
         'twoStepVerification'
     ];
 

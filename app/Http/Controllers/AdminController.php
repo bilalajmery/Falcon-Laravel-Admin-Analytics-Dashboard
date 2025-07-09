@@ -115,7 +115,7 @@ class AdminController extends commonFunction
 
             // ✅ Step 3: Create admin
             Admin::create([
-                'uid' => (string) Str::uuid(),
+                'uid' => (string) $this->uIdGenerate(),
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'],

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone', 20)->nullable()->index()->comment('Optional phone number of the admin');
 
             $table->string('profile')->nullable()->comment('Optional profile of the admin');
+            $table->string('cover')->nullable()->comment('Optional cover of the admin');
 
             $table->string('otp', 6)->nullable()->comment('One-time password for verification');
             $table->boolean('twoStepVerification')->default(false)->comment('twoStepVerification for account secure');

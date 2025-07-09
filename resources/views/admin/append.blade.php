@@ -6,7 +6,7 @@
         <td>{{ $i }}</td>
         <td class="d-flex align-items-center gap-2">
             <div>
-                <img src="{{ $d->profile ?? asset('default-profile.png') }}" alt="Profile Image"
+                <img src="{{ $d->profile ?? asset('assets/img/elearning/avatar/student.png') }}" alt="Profile Image"
                     style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;">
             </div>
             <span>{{ $d->name }}</span>

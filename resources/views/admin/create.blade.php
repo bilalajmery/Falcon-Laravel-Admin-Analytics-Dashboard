@@ -49,7 +49,7 @@
                                     <i class="fas fa-plus"></i>
                                 </label>
                                 <input id="image-upload" type="file" accept="image/*" class="d-none"
-                                    onchange="handleFileUpload(event, 'image-preview', 'image-message', 'image-error')" name="image" />
+                                    onchange="handleFileUpload(event, 'image-preview', 'image-message', 'image-error')" name="profile" />
                             </div>
 
                             <div class="border border-dashed rounded d-flex align-items-center justify-content-center p-3"
