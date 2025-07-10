@@ -8,6 +8,7 @@ use App\Http\Controllers\categoryController;
 use App\Http\Controllers\subCategoryController;
 use App\Http\Controllers\typeController;
 use App\Http\Controllers\subTypeController;
+use App\Http\Controllers\makeController;
 use App\Http\Controllers\settingController;
 use App\Http\Controllers\commonController;
 
@@ -49,6 +50,9 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
 
     Route::resource('subType', subTypeController::class);
     Route::patch('subType/{uid}/status', [subTypeController::class, 'status']);
+
+    Route::resource('make', makeController::class);
+    Route::patch('make/{uid}/status', [makeController::class, 'status']);
 
     Route::get('setting', [settingController::class, 'index']);
     Route::post('setting/personal', [settingController::class, 'personal']);

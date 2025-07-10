@@ -543,6 +543,7 @@
             <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/type">Types</a></li>
             <li class="nav-item"><a class="nav-link" href="/subTypes">Sub Types</a></li>
+            <li class="nav-item"><a class="nav-link" href="/make">Makes</a></li>
             <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
         </ul>
