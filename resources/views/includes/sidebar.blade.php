@@ -173,6 +173,8 @@
 
                 <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
+                <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
+                <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
                 <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
             </ul>
@@ -223,6 +225,28 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="/category" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </span>
+                            <span class="nav-link-text ps-1">Categories</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/subCategory" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <i class="fab fa-git-alt"></i>
+                            </span>
+                            <span class="nav-link-text ps-1">Sub Categories</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="/setting" role="button">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
@@ -251,6 +275,8 @@
 
             <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
+            <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
+            <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
         </ul>
