@@ -175,6 +175,7 @@
                 <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
                 <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
                 <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
+                <li class="nav-item"><a class="nav-link" href="/type">Types</a></li>
                 <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
             </ul>
@@ -247,6 +248,17 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="/type" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <i class="fas fa-text-height"></i>
+                            </span>
+                            <span class="nav-link-text ps-1">Types</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="/setting" role="button">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
@@ -277,6 +289,7 @@
             <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
             <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
+            <li class="nav-item"><a class="nav-link" href="/type">Types</a></li>
             <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
         </ul>

@@ -541,6 +541,7 @@
             <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
             <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
+            <li class="nav-item"><a class="nav-link" href="/type">Types</a></li>
             <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
         </ul>

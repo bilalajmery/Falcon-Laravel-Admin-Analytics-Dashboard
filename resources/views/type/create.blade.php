@@ -4,28 +4,27 @@
     <div class="card-header">
         <div class="row flex-between-end">
             <div class="col-auto align-self-center">
-                <h5 class="mb-0" data-anchor="data-anchor" id="example">Edit Category</h5>
+                <h5 class="mb-0" data-anchor="data-anchor" id="example">Create New Type</h5>
             </div>
         </div>
     </div>
 
     <div class="card-body bg-body-tertiary">
         <form onsubmit="submitForm(event)">
-            <input type="hidden" name="_method" value="PATCH">
             <div class="row">
                 <div class="col-12">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="name" placeholder="Category Name" name="name" value="{{ $category->name }}" />
-                        <label for="name">Category Name</label>
+                        <input class="form-control" type="text" id="name" placeholder="Type Name" name="name" />
+                        <label for="name">Type Name</label>
                     </div>
                 </div>
 
                 <div class="col-md-4 mt-md-0 mt-4">
-                    <!-- Image Card -->
+                    <!-- Image Upload Card -->
                     <div class="card shadow-md">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title mb-0">Category Image</h5>
+                                <h5 class="card-title mb-0">Type Image</h5>
                                 <label for="image-upload" class="btn btn-sm btn-light border">
                                     <i class="fas fa-plus"></i>
                                 </label>
@@ -35,12 +34,10 @@
 
                             <div class="border border-dashed rounded d-flex align-items-center justify-content-center p-3"
                                 style="height: 13rem; position: relative;">
-                                <img id="image-preview" class="{{ $category->image ? '' : 'd-none' }}"
-                                    style="width: 100%; height: 100%; object-fit: contain;" alt="Image Preview"
-                                    src="{{ $category->image ?? '' }}" />
-                                <div id="image-message" class="text-center text-muted {{ $category->image ? 'd-none' : '' }}">
+                                <img id="image-preview" class="d-none" style="width: 100%; height: 100%; object-fit: contain;" alt="Image Preview" />
+                                <div id="image-message" class="text-center text-muted">
                                     <i class="bi bi-image fs-1"></i>
-                                    <p class="mt-2 small">Upload Category Image</p>
+                                    <p class="mt-2 small">Upload Type Image</p>
                                 </div>
                             </div>
 
@@ -51,7 +48,7 @@
 
                 <div class="col-12 mt-5 text-end">
                     <button class="btn btn-primary me-1 mb-1" type="submit" id="formSubmitButton">
-                        Update
+                        Create
                     </button>
                 </div>
             </div>
@@ -65,11 +62,11 @@
     function submitForm(event) {
         event.preventDefault();
 
+        const $form = $(event.target);
         const $submitButton = $('#formSubmitButton');
         const formData = new FormData(event.target);
 
-        const exception = ['image'];
-        const validation = requiredValidate(formData, exception);
+        const validation = requiredValidate(formData);
         if (validation.error) {
             createToast('error', validation.message);
             return;
@@ -77,14 +74,14 @@
 
         $.ajax({
             method: 'POST',
-            url: '{{ route('category.update', $category->uid) }}',
+            url: '/type',
             data: formData,
             processData: false,
             contentType: false,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $submitButton.prop('disabled', true).html(`
                     <div class="spinner-border text-white" style="width: 20px; height: 20px;" role="status">
                         <span class="visually-hidden">Loading...</span>
@@ -92,15 +89,15 @@
                 `);
             }
         })
-        .done(function(response) {
+        .done(function (response) {
             if (!response.error) {
                 createToast('success', response.message);
-                location.assign("/category");
+                location.assign("/type");
             } else {
                 createToast('error', response.message || 'An unexpected error occurred.');
             }
         })
-        .fail(function(xhr) {
+        .fail(function (xhr) {
             const response = xhr.responseJSON || {};
             let message = 'An error occurred while submitting the form.';
 
@@ -112,8 +109,8 @@
 
             createToast('error', message);
         })
-        .always(function() {
-            $submitButton.prop('disabled', false).html('Update');
+        .always(function () {
+            $submitButton.prop('disabled', false).html('Create');
         });
     }
 </script>

@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-class Category extends Model
+class Type extends Model
 {
     use SoftDeletes;
 
     /**
      * The primary key associated with the table.
      */
-    protected $primaryKey = 'categoryId';
+    protected $primaryKey = 'typeId';
 
     /**
      * Indicates if the IDs are auto-incrementing.

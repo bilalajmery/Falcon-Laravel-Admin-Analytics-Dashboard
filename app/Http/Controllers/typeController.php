@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\commonFunction;
-use App\Models\Category;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
-class categoryController extends commonFunction
+class typeController extends commonFunction
 {
     public function index(Request $request)
     {
         try {
             if ($request->ajax()) {
-                $query = Category::select('uid', 'name', 'image', 'status', 'created_at', 'deleted_at');
+                $query = Type::select('uid', 'name', 'image', 'status', 'created_at', 'deleted_at');
 
-                if ($request->boolean('trashCategory')) {
+                if ($request->boolean('trashType')) {
                     $query = $query->onlyTrashed();
                 }
 
@@ -30,14 +30,14 @@ class categoryController extends commonFunction
                     ->paginate($perPage, ['*'], 'page', $page);
 
                 $stats = [
-                    'total' => Category::withTrashed()->count(),
-                    'public' => Category::where('status', true)->count(),
-                    'private' => Category::where('status', false)->count(),
-                    'trash' => Category::onlyTrashed()->count(),
+                    'total' => Type::withTrashed()->count(),
+                    'public' => Type::where('status', true)->count(),
+                    'private' => Type::where('status', false)->count(),
+                    'trash' => Type::onlyTrashed()->count(),
                 ];
 
                 return response()->json([
-                    'data' => view('category.append', ['data' => $data])->render(),
+                    'data' => view('type.append', ['data' => $data])->render(),
                     'pagination' => [
                         'total' => $data->total(),
                         'per_page' => $data->perPage(),
@@ -52,7 +52,7 @@ class categoryController extends commonFunction
                 ]);
             }
 
-            return view('category.index');
+            return view('type.index');
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);
         }
@@ -61,7 +61,7 @@ class categoryController extends commonFunction
     public function create()
     {
         try {
-            return view('category.create');
+            return view('type.create');
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);
         }
@@ -77,7 +77,7 @@ class categoryController extends commonFunction
 
             $imagePath = null;
             if ($request->hasFile('image')) {
-                $response = $this->storeImage($request->file('image'), 'uploads/category');
+                $response = $this->storeImage($request->file('image'), 'uploads/type');
 
                 if (!empty($response['error'])) {
                     return response()->json([
@@ -89,7 +89,7 @@ class categoryController extends commonFunction
                 $imagePath = $response['path'];
             }
 
-            Category::create([
+            Type::create([
                 'uid' => (string) $this->uIdGenerate(),
                 'name' => $validated['name'],
                 'image' => $imagePath,
@@ -98,7 +98,7 @@ class categoryController extends commonFunction
 
             return response()->json([
                 'error' => false,
-                'message' => 'Category created successfully.',
+                'message' => 'Type created successfully.',
             ], 201);
         } catch (\Illuminate\Validation\ValidationException $th) {
             return response()->json([
@@ -114,8 +114,8 @@ class categoryController extends commonFunction
     public function edit(string $uid)
     {
         try {
-            $category = Category::where('uid', $uid)->firstOrFail();
-            return view('category.edit', compact('category'));
+            $type = Type::where('uid', $uid)->firstOrFail();
+            return view('type.edit', compact('type'));
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);
         }
@@ -124,16 +124,16 @@ class categoryController extends commonFunction
     public function update(Request $request, string $uid)
     {
         try {
-            $category = Category::where('uid', $uid)->firstOrFail();
+            $type = Type::where('uid', $uid)->firstOrFail();
 
             $validated = $request->validate([
                 'name' => 'required|string|max:100',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-            $imagePath = $category->image;
+            $imagePath = $type->image;
             if ($request->hasFile('image')) {
-                $response = $this->storeImage($request->file('image'), 'uploads/category');
+                $response = $this->storeImage($request->file('image'), 'uploads/type');
 
                 if (!empty($response['error'])) {
                     return response()->json([
@@ -145,14 +145,14 @@ class categoryController extends commonFunction
                 $imagePath = $response['path'];
             }
 
-            $category->update([
+            $type->update([
                 'name' => $validated['name'],
                 'image' => $imagePath,
             ]);
 
             return response()->json([
                 'error' => false,
-                'message' => 'Category updated successfully.',
+                'message' => 'Type updated successfully.',
             ]);
         } catch (\Illuminate\Validation\ValidationException $th) {
             return response()->json([
@@ -168,14 +168,14 @@ class categoryController extends commonFunction
     public function destroy(string $uid)
     {
         try {
-            $category = Category::withTrashed()->where('uid', $uid)->firstOrFail();
+            $type = Type::withTrashed()->where('uid', $uid)->firstOrFail();
 
-            if ($category->trashed()) {
-                $category->restore();
-                $message = 'Category restored successfully.';
+            if ($type->trashed()) {
+                $type->restore();
+                $message = 'Type restored successfully.';
             } else {
-                $category->delete();
-                $message = 'Category deleted successfully.';
+                $type->delete();
+                $message = 'Type deleted successfully.';
             }
 
             return response()->json([
@@ -190,13 +190,13 @@ class categoryController extends commonFunction
     public function status(string $uid)
     {
         try {
-            $category = Category::where('uid', $uid)->firstOrFail();
-            $category->status = !$category->status;
-            $category->save();
+            $type = Type::where('uid', $uid)->firstOrFail();
+            $type->status = !$type->status;
+            $type->save();
 
             return response()->json([
                 'error' => false,
-                'message' => 'Category status updated successfully.',
+                'message' => 'Type status updated successfully.',
             ]);
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);

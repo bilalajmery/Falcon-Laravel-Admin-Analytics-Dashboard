@@ -6,7 +6,7 @@ use App\Http\Controllers\commonFunction;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
-class SubCategoryController extends commonFunction
+class subCategoryController extends commonFunction
 {
     public function index(Request $request)
     {

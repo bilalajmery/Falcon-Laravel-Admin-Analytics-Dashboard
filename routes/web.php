@@ -6,6 +6,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\subCategoryController;
+use App\Http\Controllers\typeController;
 use App\Http\Controllers\settingController;
 use App\Http\Controllers\commonController;
 
@@ -41,6 +42,9 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
 
     Route::resource('subCategory', subCategoryController::class);
     Route::patch('subCategory/{uid}/status', [subCategoryController::class, 'status']);
+
+    Route::resource('type', typeController::class);
+    Route::patch('type/{uid}/status', [typeController::class, 'status']);
 
     Route::get('setting', [settingController::class, 'index']);
     Route::post('setting/personal', [settingController::class, 'personal']);
