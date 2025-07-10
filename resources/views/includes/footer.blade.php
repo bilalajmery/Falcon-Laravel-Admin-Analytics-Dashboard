@@ -246,6 +246,33 @@
                 $typeSelect.html(`<option value="" disabled selected>No types found</option>`).prop('disabled', false);
             });
     }
+
+    function getMake(makeId = 0) {
+        const $makeSelect = $("select[name='makeId']");
+
+        $makeSelect.prop('disabled', true).html(`<option value="">Fetching Makes...</option>`);
+
+        $.ajax({
+                method: "GET",
+                url: '/common/make',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            .done(function(response) {
+                const makes = response.make || [];
+                let options = `<option value="" disabled selected>${makes.length ? "Select Make" : "No Makes found"}</option>`;
+                for (const make of makes) {
+                    const selected = make.uid == makeId ? 'selected' : '';
+                    options += `<option value="${make.uid}" ${selected}>${make.name}</option>`;
+                }
+                $makeSelect.html(options).prop('disabled', false);
+            })
+            .fail(function() {
+                createToast('error', 'Failed to load makes. Please try again.');
+                $makeSelect.html(`<option value="" disabled selected>No makes found</option>`).prop('disabled', false);
+            });
+    }
 </script>
 
 </body>
