@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\categoryController;
 use App\Http\Controllers\settingController;
 
 Route::group(['middleware' => ['alreadyLogin', 'preventBackHistory', 'rememberMe', 'handleServerError', 'storeRequestLogs']], function () {
@@ -32,6 +33,9 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
 
     Route::resource('admin', adminController::class);
     Route::patch('admin/{uid}/status', [adminController::class, 'status']);
+
+    Route::resource('category', categoryController::class);
+    Route::patch('category/{uid}/status', [categoryController::class, 'status']);
 
     Route::get('setting', [settingController::class, 'index']);
     Route::post('setting/personal', [settingController::class, 'personal']);

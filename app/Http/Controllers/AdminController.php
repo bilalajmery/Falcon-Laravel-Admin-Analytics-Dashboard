@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class AdminController extends commonFunction
+class adminController extends commonFunction
 {
     public function index(Request $request)
     {

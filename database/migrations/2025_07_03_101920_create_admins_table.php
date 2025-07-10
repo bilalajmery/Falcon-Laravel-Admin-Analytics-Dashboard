@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->string('otp', 6)->nullable()->comment('One-time password for verification');
             $table->boolean('twoStepVerification')->default(false)->comment('twoStepVerification for account secure');
-            $table->boolean('status')->default(true)->index()->comment('Account status: active or inactive');
+            $table->boolean('status')->default(true)->index()->comment('Account status: public or private');
 
             $table->string('password')->comment('Hashed login password');
 
