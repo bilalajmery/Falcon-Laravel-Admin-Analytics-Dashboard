@@ -313,11 +313,11 @@
                                 </div>
                                 <div class="col-4">
                                     <a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none"
-                                        href="https://themewagon.com/" target="_blank">
+                                        href="https://digitalelliptical.com/" target="_blank">
                                         <img class="rounded" src="/assets/img/nav-icons/themewagon.png" alt=""
                                             width="40" height="40" />
                                         <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">
-                                            Themewagon
+                                            Digital Elliptical
                                         </p>
                                     </a>
                                 </div>
@@ -542,6 +542,7 @@
             <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/type">Types</a></li>
+            <li class="nav-item"><a class="nav-link" href="/subTypes">Sub Types</a></li>
             <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
         </ul>
@@ -728,11 +729,11 @@
                                 </div>
                                 <div class="col-4">
                                     <a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none"
-                                        href="https://themewagon.com/" target="_blank">
+                                        href="https://digitalelliptical.com/" target="_blank">
                                         <img class="rounded" src="/assets/img/nav-icons/themewagon.png" alt=""
                                             width="40" height="40" />
                                         <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">
-                                            Themewagon
+                                            Digital Elliptical
                                         </p>
                                     </a>
                                 </div>

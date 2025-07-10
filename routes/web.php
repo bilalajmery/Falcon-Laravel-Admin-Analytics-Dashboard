@@ -7,6 +7,7 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\subCategoryController;
 use App\Http\Controllers\typeController;
+use App\Http\Controllers\subTypeController;
 use App\Http\Controllers\settingController;
 use App\Http\Controllers\commonController;
 
@@ -46,6 +47,9 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
     Route::resource('type', typeController::class);
     Route::patch('type/{uid}/status', [typeController::class, 'status']);
 
+    Route::resource('subType', subTypeController::class);
+    Route::patch('subType/{uid}/status', [subTypeController::class, 'status']);
+
     Route::get('setting', [settingController::class, 'index']);
     Route::post('setting/personal', [settingController::class, 'personal']);
     Route::post('setting/twoStepVerification', [settingController::class, 'twoStepVerification']);
@@ -55,6 +59,7 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
     Route::post('setting/accountDelete', [settingController::class, 'accountDelete']);
 
     Route::get('/common/category', [commonController::class, 'category']);
+    Route::get('/common/type', [commonController::class, 'type']);
 
 });
 

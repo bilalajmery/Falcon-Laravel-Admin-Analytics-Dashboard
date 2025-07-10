@@ -27,10 +27,10 @@
     <div class="card-header">
         <div class="row flex-between-end">
             <div class="col-auto align-self-center">
-                <h5 class="mb-0">Sub Category Management</h5>
+                <h5 class="mb-0">Sub Type Management</h5>
             </div>
             <div class="col-auto ms-auto">
-                <a href="{{ route('subCategory.create') }}">
+                <a href="{{ route('subType.create') }}">
                     <button class="btn btn-primary"><i class="fas fa-plus"></i></button>
                 </a>
                 <button class="btn btn-primary" onclick="getTableData()"><i class="fas fa-undo"></i></button>
@@ -41,26 +41,26 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="col-md-6">
                 <div class="form-floating">
-                    <select class="form-select" id="categoryId" name="categoryId" aria-label="Floating label select example">
+                    <select class="form-select" id="typeId" name="typeId" aria-label="Floating label select example">
                     </select>
-                    <label for="categoryId">Parent Category</label>
+                    <label for="typeId">Parent Type</label>
                 </div>
             </div>
             <div class="col-md-6 d-flex justify-content-end align-items-center">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="trashCategory" id="trashCategory" value="1">
-                    <label class="form-check-label" for="trashCategory">Show Only Trashed Sub Categories</label>
+                    <label class="form-check-label" for="trashCategory">Show Only Trashed Sub Types</label>
                 </div>
             </div>
         </div>
 
         <div class="table-responsive scrollbar">
-            <table class="table table-striped table-bordered overflow-hidden" id="categoryTable">
+            <table class="table table-striped table-bordered overflow-hidden" id="subTypeTable">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Sub Category Name</th>
-                        <th>Parent Category</th>
+                        <th>Sub Type Name</th>
+                        <th>Parent Type</th>
                         <th>Status</th>
                         <th>Date & Time</th>
                         <th class="text-end">Actions</th>
@@ -82,21 +82,21 @@
 @include('includes.footer')
 
 <script>
-    getCategory();
+    getType();
 
     function getTableData(page = 1, perPage = 10) {
-        const thCount = $('#categoryTable thead tr th').length;
-        const $tbody = $('#categoryTable tbody');
+        const thCount = $('#subTypeTable thead tr th').length;
+        const $tbody = $('#subTypeTable tbody');
         const $pagination = $('#pagination');
 
         $.ajax({
             method: 'GET',
-            url: '{{ route('subCategory.index') }}',
+            url: '{{ route('subType.index') }}',
             data: {
                 page: page,
                 per_page: perPage,
                 trashCategory: $('#trashCategory').is(':checked') ? 1 : 0,
-                categoryId: $('#categoryId').val(),
+                typeId: $('#typeId').val(),
             },
             beforeSend: function() {
                 $tbody.html(`
@@ -121,7 +121,7 @@
                 $("#trash").text(response.stats.trash);
             },
             error: function(xhr) {
-                const errorMessage = xhr.responseJSON?.message || 'Failed to load sub categories.';
+                const errorMessage = xhr.responseJSON?.message || 'Failed to load sub types.';
                 createToast('error', errorMessage);
                 $tbody.html(`
                     <tr>
@@ -209,7 +209,7 @@
     $(document).ready(function() {
         getTableData();
 
-        $('#trashCategory, #categoryId').on('change', function() {
+        $('#trashCategory, #typeId').on('change', function() {
             getTableData();
         });
     });

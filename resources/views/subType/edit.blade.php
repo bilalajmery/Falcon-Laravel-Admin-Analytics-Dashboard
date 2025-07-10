@@ -4,7 +4,7 @@
     <div class="card-header">
         <div class="row flex-between-end">
             <div class="col-auto align-self-center">
-                <h5 class="mb-0">Edit SubCategory</h5>
+                <h5 class="mb-0">Edit Sub Type</h5>
             </div>
         </div>
     </div>
@@ -16,17 +16,17 @@
 
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
-                        <select class="form-select" name="categoryId" id="categoryId">
+                        <select class="form-select" name="typeId" id="typeId">
                         </select>
-                        <label for="categoryId">Parent Category</label>
+                        <label for="typeId">Parent Type</label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="name" placeholder="SubCategory Name" name="name"
-                            value="{{ $subCategory->name }}" />
-                        <label for="name">SubCategory Name</label>
+                        <input class="form-control" type="text" id="name" placeholder="Sub Type Name" name="name"
+                            value="{{ $subType->name }}" />
+                        <label for="name">Sub Type Name</label>
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
                     <div class="card shadow-md">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title mb-0">SubCategory Image</h5>
+                                <h5 class="card-title mb-0">Sub Type Image</h5>
                                 <label for="image-upload" class="btn btn-sm btn-light border">
                                     <i class="fas fa-plus"></i>
                                 </label>
@@ -44,12 +44,12 @@
 
                             <div class="border border-dashed rounded d-flex align-items-center justify-content-center p-3"
                                 style="height: 13rem; position: relative;">
-                                <img id="image-preview" class="{{ $subCategory->image ? '' : 'd-none' }}"
+                                <img id="image-preview" class="{{ $subType->image ? '' : 'd-none' }}"
                                     style="width: 100%; height: 100%; object-fit: contain;"
-                                    src="{{ asset($subCategory->image ?? 'assets/img/default-image.png') }}" alt="Image Preview" />
-                                <div id="image-message" class="text-center text-muted {{ $subCategory->image ? 'd-none' : '' }}">
+                                    src="{{ asset($subType->image ?? 'assets/img/default-image.png') }}" alt="Image Preview" />
+                                <div id="image-message" class="text-center text-muted {{ $subType->image ? 'd-none' : '' }}">
                                     <i class="bi bi-image fs-1"></i>
-                                    <p class="mt-2 small">Upload SubCategory Image</p>
+                                    <p class="mt-2 small">Upload Sub Type Image</p>
                                 </div>
                             </div>
 
@@ -71,7 +71,7 @@
 @include('includes.footer')
 
 <script>
-    getCategory('{{ $subCategory->categoryId }}');
+    getType('{{ $subType->typeId }}');
 
     function submitForm(event) {
         event.preventDefault();
@@ -88,7 +88,7 @@
 
         $.ajax({
                 method: 'POST',
-                url: '{{ route('subCategory.update', $subCategory->uid) }}',
+                url: '{{ route('subType.update', $subType->uid) }}',
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -106,7 +106,7 @@
             .done(function(response) {
                 if (!response.error) {
                     createToast('success', response.message);
-                    location.assign("/subCategory");
+                    location.assign("/subType");
                 } else {
                     createToast('error', response.message || 'An unexpected error occurred.');
                 }

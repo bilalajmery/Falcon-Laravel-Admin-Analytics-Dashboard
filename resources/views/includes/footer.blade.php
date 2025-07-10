@@ -2,7 +2,7 @@
     <div class="row g-0 justify-content-between fs-10 mt-4 mb-3">
         <div class="col-12 col-sm-auto text-center">
             <p class="mb-0 text-600">Thank you for creating with Falcon <span class="d-none d-sm-inline-block">|
-                </span><br class="d-sm-none" /> 2025 &copy; <a href="https://themewagon.com/">Themewagon</a>
+                </span><br class="d-sm-none" /> 2025 &copy; <a href="https://digitalelliptical.com/">Digital Elliptical</a>
             </p>
         </div>
         <div class="col-12 col-sm-auto text-center">
@@ -217,6 +217,33 @@
             .fail(function() {
                 createToast('error', 'Failed to load Categories. Please try again.');
                 $categorySelect.html(`<option value="" disabled selected>No categories found</option>`).prop('disabled', false);
+            });
+    }
+
+    function getType(typeId = 0) {
+        const $typeSelect = $("select[name='typeId']");
+
+        $typeSelect.prop('disabled', true).html(`<option value="">Fetching Types...</option>`);
+
+        $.ajax({
+                method: "GET",
+                url: '/common/type',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            .done(function(response) {
+                const types = response.type || [];
+                let options = `<option value="" disabled selected>${types.length ? "Select Type" : "No Types found"}</option>`;
+                for (const type of types) {
+                    const selected = type.uid == typeId ? 'selected' : '';
+                    options += `<option value="${type.uid}" ${selected}>${type.name}</option>`;
+                }
+                $typeSelect.html(options).prop('disabled', false);
+            })
+            .fail(function() {
+                createToast('error', 'Failed to load Types. Please try again.');
+                $typeSelect.html(`<option value="" disabled selected>No types found</option>`).prop('disabled', false);
             });
     }
 </script>
