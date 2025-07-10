@@ -32,6 +32,9 @@
     <link href="/assets/css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <link href="/vendors/choices/choices.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/commonAssets/css/style.css">
 
     <script src="/commonAssets/js/jquery.min.js"></script>
     <script src="/commonAssets/js/commonFunction.js"></script>

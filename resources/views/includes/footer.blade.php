@@ -185,14 +185,42 @@
 <script src="/vendors/lodash/lodash.min.js"></script>
 <script src="/vendors/list.js/list.min.js"></script>
 <script src="/assets/js/theme.js"></script>
+<script src="/vendors/choices/choices.min.js"></script>
 
 {{-- SweetAlert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="/commonAssets/js/toast.js"></script>
+
+<script>
+    function getCategory(categoryId = 0) {
+        const $categorySelect = $("select[name='categoryId']");
+
+        $categorySelect.prop('disabled', true).html(`<option value="">Fetching Categories...</option>`);
+
+        $.ajax({
+                method: "GET",
+                url: '/common/category',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            .done(function(response) {
+                const categories = response.category || [];
+                let options = `<option value="" disabled selected>${categories.length ? "Select Category" : "No Categories found"}</option>`;
+                for (const category of categories) {
+                    const selected = category.uid == categoryId ? 'selected' : '';
+                    options += `<option value="${category.uid}" ${selected}>${category.name}</option>`;
+                }
+                $categorySelect.html(options).prop('disabled', false);
+            })
+            .fail(function() {
+                createToast('error', 'Failed to load Categories. Please try again.');
+                $categorySelect.html(`<option value="" disabled selected>No categories found</option>`).prop('disabled', false);
+            });
+    }
+</script>
+
 </body>
-
-
-<!-- Mirrored from prium.github.io/falcon/v3.24.0// by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Jul 2025 07:38:09 GMT -->
 
 </html>

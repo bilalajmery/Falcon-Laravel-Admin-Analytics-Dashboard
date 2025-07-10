@@ -9,7 +9,8 @@
                         <div class="col d-md-flex d-lg-block flex-between-center">
                             <h6 class="mb-md-0 mb-lg-2">{{ $label }}</h6>
                             <span class="badge rounded-pill badge-subtle-{{ $color }}">
-                                <i class="fas {{ $label === 'Trash' ? 'fa-trash-alt' : ($label === 'Public' ? 'fa-lock-open' : ($label === 'Private' ? 'fa-lock' : 'fa-layer-group')) }}"></i>
+                                <i
+                                    class="fas {{ $label === 'Trash' ? 'fa-trash-alt' : ($label === 'Public' ? 'fa-lock-open' : ($label === 'Private' ? 'fa-lock' : 'fa-layer-group')) }}"></i>
                             </span>
                         </div>
                         <div class="col-auto">
@@ -26,10 +27,10 @@
     <div class="card-header">
         <div class="row flex-between-end">
             <div class="col-auto align-self-center">
-                <h5 class="mb-0">Category Management</h5>
+                <h5 class="mb-0">Sub Category Management</h5>
             </div>
             <div class="col-auto ms-auto">
-                <a href="{{ route('category.create') }}">
+                <a href="{{ route('subCategory.create') }}">
                     <button class="btn btn-primary"><i class="fas fa-plus"></i></button>
                 </a>
                 <button class="btn btn-primary" onclick="getTableData()"><i class="fas fa-undo"></i></button>
@@ -37,10 +38,19 @@
         </div>
     </div>
     <div class="card-body bg-body-tertiary">
-        <div class="d-flex justify-content-end align-items-center mb-2">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="trashCategory" id="trashCategory" value="1">
-                <label class="form-check-label" for="trashCategory">Show Only Trashed Categories</label>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <select class="form-select" id="categoryId" name="categoryId" aria-label="Floating label select example">
+                    </select>
+                    <label for="categoryId">Parent Category</label>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="trashCategory" id="trashCategory" value="1">
+                    <label class="form-check-label" for="trashCategory">Show Only Trashed Sub Categories</label>
+                </div>
             </div>
         </div>
 
@@ -49,10 +59,11 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
+                        <th>Sub Category Name</th>
+                        <th>Parent Category</th>
                         <th>Status</th>
                         <th>Date & Time</th>
-                        <th class="text-end"></th>
+                        <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +82,8 @@
 @include('includes.footer')
 
 <script>
+    getCategory();
+
     function getTableData(page = 1, perPage = 10) {
         const thCount = $('#categoryTable thead tr th').length;
         const $tbody = $('#categoryTable tbody');
@@ -78,13 +91,14 @@
 
         $.ajax({
             method: 'GET',
-            url: '{{ route('category.index') }}',
+            url: '{{ route('subCategory.index') }}',
             data: {
                 page: page,
                 per_page: perPage,
                 trashCategory: $('#trashCategory').is(':checked') ? 1 : 0,
+                categoryId: $('#categoryId').val(),
             },
-            beforeSend: function () {
+            beforeSend: function() {
                 $tbody.html(`
                     <tr>
                         <td colspan="${thCount}">
@@ -98,7 +112,7 @@
                 `);
                 $pagination.html('');
             },
-            success: function (response) {
+            success: function(response) {
                 $tbody.html(response.data);
                 renderPagination(response.pagination);
                 $("#total").text(response.stats.total);
@@ -106,8 +120,8 @@
                 $("#private").text(response.stats.private);
                 $("#trash").text(response.stats.trash);
             },
-            error: function (xhr) {
-                const errorMessage = xhr.responseJSON?.message || 'Failed to load categories.';
+            error: function(xhr) {
+                const errorMessage = xhr.responseJSON?.message || 'Failed to load sub categories.';
                 createToast('error', errorMessage);
                 $tbody.html(`
                     <tr>
@@ -124,7 +138,14 @@
 
     function renderPagination(pagination) {
         const $pagination = $('#pagination');
-        const { total, per_page, current_page, last_page, from, to } = pagination;
+        const {
+            total,
+            per_page,
+            current_page,
+            last_page,
+            from,
+            to
+        } = pagination;
 
         if (last_page <= 1) {
             $pagination.html('');
@@ -177,7 +198,7 @@
 
         $pagination.html(paginationHtml);
 
-        $pagination.find('button[data-page]').on('click', function () {
+        $pagination.find('button[data-page]').on('click', function() {
             const page = $(this).data('page');
             if (page && !$(this).prop('disabled')) {
                 getTableData(page, per_page);
@@ -185,10 +206,10 @@
         });
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         getTableData();
 
-        $('#trashCategory').on('change', function () {
+        $('#trashCategory').on('change', function() {
             getTableData();
         });
     });

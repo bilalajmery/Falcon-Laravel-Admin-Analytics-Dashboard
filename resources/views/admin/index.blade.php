@@ -1,40 +1,5 @@
 @include('includes.header')
 
-<style>
-    .checkbox-card {
-        max-width: 400px;
-        /* Adjust as needed */
-    }
-
-    .form-check-input:checked {
-        background-color: #0d6efd;
-        /* Bootstrap primary color for checked state */
-    }
-
-    .form-check-label {
-        cursor: pointer;
-    }
-
-    .stats-card {
-        background-color: #f8f9fa;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    .stats-card .stat-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #dee2e6;
-    }
-
-    .stats-card .stat-item:last-child {
-        border-bottom: none;
-    }
-</style>
-
 <div class="row mb-4">
     <div class="col-md-3">
         <div class="card h-100">
