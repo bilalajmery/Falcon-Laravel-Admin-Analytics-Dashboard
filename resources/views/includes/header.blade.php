@@ -34,6 +34,9 @@
     <link href="/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
     <link href="/vendors/choices/choices.min.css" rel="stylesheet" />
 
+    {{-- Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <link rel="stylesheet" href="/commonAssets/css/style.css">
 
     <script src="/commonAssets/js/jquery.min.js"></script>

@@ -36,6 +36,11 @@
                     <div class="form-floating">
                         <input class="form-control" type="password" id="password" placeholder="Password" name="password" />
                         <label for="password">Password</label>
+
+                        <!-- Eye Icon -->
+                        <i class="fa-solid fa-eye toggle-password position-absolute"
+                            style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"
+                            onclick="togglePassword(this, 'password')"></i>
                     </div>
                 </div>
 

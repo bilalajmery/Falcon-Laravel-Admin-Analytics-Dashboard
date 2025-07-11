@@ -34,7 +34,8 @@
             <div class="card-header position-relative min-vh-25 mb-8">
 
                 <div class="cover-image">
-                    <div id="coverPreview" class="bg-holder rounded-3 rounded-bottom-0" style="background-image: url('{{ Session::get('adminSession.cover') ?? '../../assets/img/generic/4.jpg' }}');"></div>
+                    <div id="coverPreview" class="bg-holder rounded-3 rounded-bottom-0"
+                        style="background-image: url('{{ Session::get('adminSession.cover') ?? '../../assets/img/generic/4.jpg' }}');"></div>
 
                     <input class="d-none" id="upload-cover-image" type="file" />
                     <label class="cover-image-file-input" for="upload-cover-image">
@@ -133,18 +134,33 @@
                     <form onsubmit="passwordForm(event)">
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" type="text" id="currentPassword" placeholder="********" name="currentPassword" />
+                            <input class="form-control" type="password" id="currentPassword" placeholder="********" name="currentPassword" />
                             <label for="currentPassword">Current Password</label>
+
+                            <!-- Eye Icon -->
+                            <i class="fa-solid fa-eye toggle-password position-absolute"
+                                style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"
+                                onclick="togglePassword(this, 'currentPassword')"></i>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" type="text" id="password" placeholder="********" name="password" />
-                            <label for="password">New Password</label>
+                            <input class="form-control" type="password" id="newPassword" placeholder="********" name="password" />
+                            <label for="newPassword">New Password</label>
+
+                            <!-- Eye Icon -->
+                            <i class="fa-solid fa-eye toggle-password position-absolute"
+                                style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"
+                                onclick="togglePassword(this, 'newPassword')"></i>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" type="text" id="confirmPassword" placeholder="********" name="confirmPassword" />
+                            <input class="form-control" type="password" id="confirmPassword" placeholder="********" name="confirmPassword" />
                             <label for="confirmPassword">Confirm Password</label>
+
+                            <!-- Eye Icon -->
+                            <i class="fa-solid fa-eye toggle-password position-absolute"
+                                style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"
+                                onclick="togglePassword(this, 'confirmPassword')"></i>
                         </div>
 
                         <button class="btn btn-primary d-block w-100" type="submit" id="passwordSubmitButton">Change Password</button>

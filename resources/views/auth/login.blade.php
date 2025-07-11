@@ -33,6 +33,9 @@
     <link href="/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
 
+    {{-- Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <script src="/commonAssets/js/jquery.min.js"></script>
     <script src="/commonAssets/js/commonFunction.js"></script>
 
@@ -97,8 +100,14 @@
 
                                             <div class="col-12">
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" type="password" placeholder="*******" name="password" />
-                                                    <label for="floatingInput">Password</label>
+                                                    <input class="form-control" type="password" placeholder="*******" name="password"
+                                                        id="password" />
+                                                    <label for="password">Password</label>
+
+                                                    <!-- Eye Icon -->
+                                                    <i class="fa-solid fa-eye toggle-password position-absolute"
+                                                        style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"
+                                                        onclick="togglePassword(this, 'password')"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +122,8 @@
                                             <div class="col-auto"><a class="fs-10" href="/forgot">Forgot Password?</a></div>
                                         </div>
                                         <div class="mb-3">
-                                            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit" id="formSubmitButton">Log in</button>
+                                            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit"
+                                                id="formSubmitButton">Log in</button>
                                         </div>
                                     </form>
                                 </div>
@@ -250,6 +260,8 @@
     <script src="/vendors/list.js/list.min.js"></script>
     <script src="/assets/js/theme.js"></script>
     <script src="/commonAssets/js/toast.js"></script>
+    <script src="/commonAssets/js/commonFunction.js"></script>
+
     <script>
         function submitForm(event) {
             event.preventDefault();
@@ -286,7 +298,7 @@
                         createToast('success', response.message);
                         if (!response.twoStepVerification) {
                             location.assign("/home");
-                        }else{
+                        } else {
                             location.assign(`/twoStepVerification/${response.uid}`);
                         }
 
