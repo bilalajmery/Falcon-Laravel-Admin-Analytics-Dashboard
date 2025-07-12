@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'rememberMe' => \App\Http\Middleware\rememberMe::class,
             'handleServerError' => \App\Http\Middleware\handleServerError::class,
             'storeRequestLogs' => \App\Http\Middleware\storeRequestLogs::class,
+            'accessManagement' => \App\Http\Middleware\accessManagement::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

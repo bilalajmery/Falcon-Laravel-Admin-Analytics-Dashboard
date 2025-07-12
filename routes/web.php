@@ -35,7 +35,7 @@ Route::group(['middleware' => ['alreadyLogin', 'preventBackHistory', 'rememberMe
 
 });
 
-Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHistory', 'storeRequestLogs']], function () {
+Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHistory', 'storeRequestLogs', 'accessManagement']], function () {
 
     Route::get('/home', [homeController::class, 'index'])->name('home');
 
@@ -76,11 +76,11 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
     Route::post('setting/cover', [settingController::class, 'cover']);
     Route::post('setting/accountDelete', [settingController::class, 'accountDelete']);
 
-    Route::get('/common/category', [commonController::class, 'category']);
+});
+
+Route::get('/common/category', [commonController::class, 'category']);
     Route::get('/common/type', [commonController::class, 'type']);
     Route::get('/common/make', [commonController::class, 'make']);
     Route::get('/common/role', [commonController::class, 'role']);
-
-});
 
 
