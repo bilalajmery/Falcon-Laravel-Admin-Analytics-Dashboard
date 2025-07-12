@@ -1,19 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\authController;
-use App\Http\Controllers\homeController;
 use App\Http\Controllers\categoryController;
-use App\Http\Controllers\subCategoryController;
-use App\Http\Controllers\typeController;
-use App\Http\Controllers\subTypeController;
+use App\Http\Controllers\commonController;
+use App\Http\Controllers\employeeController;
+use App\Http\Controllers\homeController;
 use App\Http\Controllers\makeController;
 use App\Http\Controllers\modelController;
 use App\Http\Controllers\roleController;
-use App\Http\Controllers\employeeController;
 use App\Http\Controllers\settingController;
-use App\Http\Controllers\commonController;
+use App\Http\Controllers\subCategoryController;
+use App\Http\Controllers\subTypeController;
+use App\Http\Controllers\typeController;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['alreadyLogin', 'preventBackHistory', 'rememberMe', 'handleServerError', 'storeRequestLogs']], function () {
 
@@ -79,8 +79,7 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
 });
 
 Route::get('/common/category', [commonController::class, 'category']);
-    Route::get('/common/type', [commonController::class, 'type']);
-    Route::get('/common/make', [commonController::class, 'make']);
-    Route::get('/common/role', [commonController::class, 'role']);
-
-
+Route::get('/common/type', [commonController::class, 'type']);
+Route::get('/common/make', [commonController::class, 'make']);
+Route::get('/common/role', [commonController::class, 'role']);
+Route::get('/common/sidebar', [commonController::class, 'sidebar']);

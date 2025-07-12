@@ -193,6 +193,61 @@
 <script src="/commonAssets/js/toast.js"></script>
 
 <script>
+    getSideBar();
+
+    function getSideBar() {
+        $.ajax({
+                method: "GET",
+                url: '/common/sidebar',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            .done(function(response) {
+
+                // Define all possible permission keys used in the sidebar
+                const relativeItems = [
+                    'home',
+                    'category',
+                    'subCategory',
+                    'type',
+                    'subType',
+                    'make',
+                    'model',
+                ];
+
+                const adminOnlyItems = [
+                    'admin',
+                    'role',
+                    'employee',
+                ];
+
+                if (response.admin.type === "ADMIN") {
+                    relativeItems.forEach(function(key) {
+                        $('.nav-item-' + key).removeClass('d-none');
+                    });
+                    adminOnlyItems.forEach(function(key) {
+                        $('.nav-item-' + key).removeClass('d-none');
+                    });
+                }
+
+                if (response.admin.type === "EMPLOYEE") {
+                    const permissions = response.admin.role.permission ? JSON.parse(response.admin.role.permission) : {};
+                    relativeItems.forEach(function(key) {
+                        if (!permissions[key]) {
+                            $('.nav-item-' + key).remove(); // Remove the sidebar item if permission is missing
+                        } else {
+                            $('.nav-item-' + key).removeClass('d-none');
+                        }
+                    });
+                }
+            })
+            .fail(function() {
+                createToast('error', 'Failed to load sidebar. Please try again.');
+            });
+    }
+
+
     function getCategory(categoryId = 0) {
         const $categorySelect = $("select[name='categoryId']");
 

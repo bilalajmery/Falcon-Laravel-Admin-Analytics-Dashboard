@@ -147,7 +147,9 @@
                 <li class="nav-item dropdown"><a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <div class="avatar avatar-xl">
-                            <img class="rounded-circle" src="{{ Session::get('adminSession.profile') ?? asset('assets/img/elearning/avatar/student.png') }}" alt="" />
+                            <img class="rounded-circle"
+                                src="{{ Session::get('adminSession.profile') ?? asset('assets/img/elearning/avatar/student.png') }}"
+                                alt="" />
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
@@ -155,7 +157,7 @@
                             <a class="dropdown-item fw-bold text-warning" href="#!">
                                 <span class="fas fa-crown me-1"></span>
                                 <span>{{ Session::GET('adminSession.name') }}</span>
-                                <br> <span style="margin-left: 23px; font-size: 13px;">{{ Session::GET("adminSession.role") }}</span>
+                                <br> <span style="margin-left: 23px; font-size: 13px;">{{ Session::GET('adminSession.role') }}</span>
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/setting">Settings</a>
@@ -172,17 +174,18 @@
         <div class="collapse navbar-collapse scrollbar py-lg-2" id="navbarDoubleTop">
             <ul class="navbar-nav" data-top-nav-dropdowns="data-top-nav-dropdowns">
 
-                <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
-                <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
-                <li class="nav-item"><a class="nav-link" href="/type">Types</a></li>
-                <li class="nav-item"><a class="nav-link" href="/subType">Sub Types</a></li>
-                <li class="nav-item"><a class="nav-link" href="/make">Makes</a></li>
-                <li class="nav-item"><a class="nav-link" href="/model">Models</a></li>
-                <li class="nav-item"><a class="nav-link" href="/role">Roles</a></li>
-                <li class="nav-item"><a class="nav-link" href="/employee">Employee</a></li>
-                <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
+                <li class="nav-item nav-item-home d-none"><a class="nav-link" href="/home">Home</a></li>
+                <li class="nav-item nav-item-admin d-none"><a class="nav-link" href="/admin">Admins</a></li>
+                <li class="nav-item nav-item-category d-none"><a class="nav-link" href="/category">Categories</a></li>
+                <li class="nav-item nav-item-subCategory d-none"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
+                <li class="nav-item nav-item-type d-none"><a class="nav-link" href="/type">Types</a></li>
+                <li class="nav-item nav-item-subType d-none"><a class="nav-link" href="/subType">Sub Types</a></li>
+                <li class="nav-item nav-item-make d-none"><a class="nav-link" href="/make">Makes</a></li>
+                <li class="nav-item nav-item-model d-none"><a class="nav-link" href="/model">Models</a></li>
+                <li class="nav-item nav-item-role d-none"><a class="nav-link" href="/role">Roles</a></li>
+                <li class="nav-item nav-item-employee d-none"><a class="nav-link" href="/employee">Employee</a></li>
+                <li class="nav-item nav-item-setting"><a class="nav-link" href="/setting">Setting</a></li>
+
 
             </ul>
         </div>
@@ -209,122 +212,100 @@
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-home d-none">
                     <a class="nav-link" href="/home" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-chart-pie"></span>
-                            </span>
+                            <span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span>
                             <span class="nav-link-text ps-1">Home</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-admin d-none">
                     <a class="nav-link" href="/admin" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="fas fa-user-shield"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="fas fa-user-shield"></i></span>
                             <span class="nav-link-text ps-1">Admins</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-category d-none">
                     <a class="nav-link" href="/category" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="fas fa-layer-group"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="fas fa-layer-group"></i></span>
                             <span class="nav-link-text ps-1">Categories</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-subCategory d-none">
                     <a class="nav-link" href="/subCategory" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="fab fa-git-alt"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="fab fa-git-alt"></i></span>
                             <span class="nav-link-text ps-1">Sub Categories</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-type d-none">
                     <a class="nav-link" href="/type" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="fas fa-text-height"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="fas fa-text-height"></i></span>
                             <span class="nav-link-text ps-1">Types</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-subType d-none">
                     <a class="nav-link" href="/subType" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="fas fa-tenge"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="fas fa-tenge"></i></span>
                             <span class="nav-link-text ps-1">Sub Types</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-make d-none">
                     <a class="nav-link" href="/make" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="fas fa-car-side"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="fas fa-car-side"></i></span>
                             <span class="nav-link-text ps-1">Makes</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-model d-none">
                     <a class="nav-link" href="/model" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="fas fa-fan"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="fas fa-fan"></i></span>
                             <span class="nav-link-text ps-1">Models</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-role d-none">
                     <a class="nav-link" href="/role" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="far fa-user-circle"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="far fa-user-circle"></i></span>
                             <span class="nav-link-text ps-1">Roles</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-employee d-none">
                     <a class="nav-link" href="/employee" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="far fa-user-circle"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="far fa-user-circle"></i></span>
                             <span class="nav-link-text ps-1">Employee</span>
                         </div>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item nav-item-setting">
                     <a class="nav-link" href="/setting" role="button">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <i class="fa fa-cog"></i>
-                            </span>
+                            <span class="nav-link-icon"><i class="fa fa-cog"></i></span>
                             <span class="nav-link-text ps-1">Setting</span>
                         </div>
                     </a>
@@ -346,17 +327,18 @@
     <div class="collapse navbar-collapse scrollbar" id="navbarStandard">
         <ul class="navbar-nav" data-top-nav-dropdowns="data-top-nav-dropdowns">
 
-            <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/admin">Admins</a></li>
-            <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
-            <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
-            <li class="nav-item"><a class="nav-link" href="/type">Types</a></li>
-            <li class="nav-item"><a class="nav-link" href="/subType">Sub Types</a></li>
-            <li class="nav-item"><a class="nav-link" href="/make">Makes</a></li>
-            <li class="nav-item"><a class="nav-link" href="/model">Models</a></li>
-            <li class="nav-item"><a class="nav-link" href="/role">Roles</a></li>
-            <li class="nav-item"><a class="nav-link" href="/employee">Employee</a></li>
-            <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
+            <li class="nav-item nav-item-home d-none"><a class="nav-link" href="/home">Home</a></li>
+            <li class="nav-item nav-item-admin d-none"><a class="nav-link" href="/admin">Admins</a></li>
+            <li class="nav-item nav-item-category d-none"><a class="nav-link" href="/category">Categories</a></li>
+            <li class="nav-item nav-item-subCategory d-none"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
+            <li class="nav-item nav-item-type d-none"><a class="nav-link" href="/type">Types</a></li>
+            <li class="nav-item nav-item-subType d-none"><a class="nav-link" href="/subType">Sub Types</a></li>
+            <li class="nav-item nav-item-make d-none"><a class="nav-link" href="/make">Makes</a></li>
+            <li class="nav-item nav-item-model d-none"><a class="nav-link" href="/model">Models</a></li>
+            <li class="nav-item nav-item-role d-none"><a class="nav-link" href="/role">Roles</a></li>
+            <li class="nav-item nav-item-employee d-none"><a class="nav-link" href="/employee">Employee</a></li>
+            <li class="nav-item nav-item-setting"><a class="nav-link" href="/setting">Setting</a></li>
+
 
         </ul>
     </div>
@@ -495,7 +477,8 @@
         <li class="nav-item dropdown"><a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-xl">
-                    <img class="rounded-circle" src="{{ Session::get('adminSession.profile') ?? asset('assets/img/elearning/avatar/student.png') }}" alt="" />
+                    <img class="rounded-circle" src="{{ Session::get('adminSession.profile') ?? asset('assets/img/elearning/avatar/student.png') }}"
+                        alt="" />
                 </div>
             </a>
             <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
@@ -503,7 +486,7 @@
                     <a class="dropdown-item fw-bold text-warning" href="#!">
                         <span class="fas fa-crown me-1"></span>
                         <span>{{ Session::GET('adminSession.name') }}</span>
-                        <br> <span style="margin-left: 23px; font-size: 13px;">{{ Session::GET("adminSession.role") }}</span>
+                        <br> <span style="margin-left: 23px; font-size: 13px;">{{ Session::GET('adminSession.role') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/setting">Settings</a>

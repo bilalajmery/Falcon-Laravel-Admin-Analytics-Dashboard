@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\commonFunction;
 
-use App\Models\{Category, Type, Make, Role};
+use App\Models\Admin;
+use App\Models\Category;
+use App\Models\Make;
+use App\Models\Role;
+use App\Models\Type;
+use Illuminate\Support\Facades\Session;
 
 class commonController extends commonFunction
 {
@@ -55,4 +60,22 @@ class commonController extends commonFunction
             return $this->tryCatchResponse($th);
         }
     }
+
+    public function sidebar()
+    {
+        try {
+            $adminId = Session::get('adminSession.adminId');
+
+            $admin = Admin::select('adminId', 'type', 'roleId')
+                ->with(['role:uid,permission']) // eager load only needed columns
+                ->where('adminId', $adminId)
+                ->first();
+
+            return response()->json(['error' => false, 'admin' => $admin]);
+
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
 }
