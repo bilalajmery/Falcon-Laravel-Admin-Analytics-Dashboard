@@ -1,7 +1,7 @@
 @php
     $i = 1;
 @endphp
-@foreach ($data as $d)
+@forelse ($data as $d)
     <tr class="btn-reveal-trigger">
         <td>{{ $i }}</td>
         <td class="d-flex align-items-center gap-2">
@@ -26,8 +26,8 @@
                     <div class="py-2">
                         <a class="dropdown-item" href="/employee/{{ $d->uid }}/edit" target="_blank"><i class="fas fa-edit"></i> &nbsp; Edit</a>
 
-                        <a class="dropdown-item text-{{ $d->status ? 'danger' : 'success' }} status-btn" href="#" data-id="{{ $d->uid }}"
-                            data-status="{{ $d->status ? 'public' : 'private' }}">
+                        <a class="dropdown-item text-{{ $d->status ? 'danger' : 'success' }} status-btn" href="#"
+                            data-id="{{ $d->uid }}" data-status="{{ $d->status ? 'public' : 'private' }}">
                             <i class="fas {{ $d->status ? 'fa-lock' : 'fas fa-lock-open' }}"></i> &nbsp; {{ $d->status ? 'Private' : 'Public' }}
                         </a>
 
@@ -43,7 +43,11 @@
     @php
         $i++;
     @endphp
-@endforeach
+@empty
+    <tr class="text-center">
+        <td colspan="7">No Employes Found</td>
+    </tr>
+@endforelse
 
 <script>
     $(document).ready(function() {
@@ -57,7 +61,6 @@
             });
         };
 
-        // Delete button handler
         $('.delete-btn').on('click', function() {
             const id = $(this).data('id');
             const $row = $(this).closest('tr');
@@ -112,8 +115,6 @@
             });
         });
 
-
-        // Status toggle button handler
         $('.status-btn').on('click', function() {
             const $btn = $(this);
             const id = $btn.data('id');

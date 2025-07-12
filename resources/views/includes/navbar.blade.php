@@ -542,7 +542,7 @@
             <li class="nav-item"><a class="nav-link" href="/category">Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/subCategory">Sub Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/type">Types</a></li>
-            <li class="nav-item"><a class="nav-link" href="/subTypes">Sub Types</a></li>
+            <li class="nav-item"><a class="nav-link" href="/subType">Sub Types</a></li>
             <li class="nav-item"><a class="nav-link" href="/make">Makes</a></li>
             <li class="nav-item"><a class="nav-link" href="/model">Models</a></li>
             <li class="nav-item"><a class="nav-link" href="/role">Roles</a></li>

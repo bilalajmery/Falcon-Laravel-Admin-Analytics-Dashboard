@@ -14,7 +14,7 @@ class RoleController extends commonFunction
             if ($request->ajax()) {
                 $query = Role::select('uid', 'name', 'status', 'created_at', 'deleted_at');
 
-                if ($request->boolean('trashCategory')) {
+                if ($request->boolean('trashRole')) {
                     $query = $query->onlyTrashed();
                 }
 

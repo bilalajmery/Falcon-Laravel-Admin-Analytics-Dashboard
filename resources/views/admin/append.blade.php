@@ -1,7 +1,7 @@
 @php
     $i = 1;
 @endphp
-@foreach ($data as $d)
+@forelse ($data as $d)
     <tr class="btn-reveal-trigger">
         <td>{{ $i }}</td>
         <td class="d-flex align-items-center gap-2">
@@ -42,7 +42,11 @@
     @php
         $i++;
     @endphp
-@endforeach
+    @empty
+    <tr class="text-center">
+        <td colspan="6">No Admins Found</td>
+    </tr>
+@endforelse
 
 <script>
     $(document).ready(function() {

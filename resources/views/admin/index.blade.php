@@ -6,7 +6,8 @@
             <div class="card-body">
                 <div class="row flex-between-center">
                     <div class="col d-md-flex d-lg-block flex-between-center">
-                        <h6 class="mb-md-0 mb-lg-2">Total</h6><span class="badge rounded-pill badge-subtle-warning"><i class="fas fa-user-shield"></i></span>
+                        <h6 class="mb-md-0 mb-lg-2">Total</h6><span class="badge rounded-pill badge-subtle-warning"><i
+                                class="fas fa-user-shield"></i></span>
                     </div>
                     <div class="col-auto">
                         <h4 class="fs-6 fw-normal text-700" id="total">0</h4>
@@ -21,7 +22,8 @@
             <div class="card-body">
                 <div class="row flex-between-center">
                     <div class="col d-md-flex d-lg-block flex-between-center">
-                        <h6 class="mb-md-0 mb-lg-2">Public</h6><span class="badge rounded-pill badge-subtle-success"><i class="fas fa-lock-open"></i></span>
+                        <h6 class="mb-md-0 mb-lg-2">Public</h6><span class="badge rounded-pill badge-subtle-success"><i
+                                class="fas fa-lock-open"></i></span>
                     </div>
                     <div class="col-auto">
                         <h4 class="fs-6 fw-normal text-700" id="public">0</h4>
@@ -36,7 +38,8 @@
             <div class="card-body">
                 <div class="row flex-between-center">
                     <div class="col d-md-flex d-lg-block flex-between-center">
-                        <h6 class="mb-md-0 mb-lg-2">Private</h6><span class="badge rounded-pill badge-subtle-danger"><i class="fas fa-lock"></i></span>
+                        <h6 class="mb-md-0 mb-lg-2">Private</h6><span class="badge rounded-pill badge-subtle-danger"><i
+                                class="fas fa-lock"></i></span>
                     </div>
                     <div class="col-auto">
                         <h4 class="fs-6 fw-normal text-700" id="private">0</h4>
@@ -51,7 +54,8 @@
             <div class="card-body">
                 <div class="row flex-between-center">
                     <div class="col d-md-flex d-lg-block flex-between-center">
-                        <h6 class="mb-md-0 mb-lg-2">Trash</h6><span class="badge rounded-pill badge-subtle-danger"><i class="fas fa-trash-alt"></i></span>
+                        <h6 class="mb-md-0 mb-lg-2">Trash</h6><span class="badge rounded-pill badge-subtle-danger"><i
+                                class="fas fa-trash-alt"></i></span>
                     </div>
                     <div class="col-auto">
                         <h4 class="fs-6 fw-normal text-700" id="trash">0</h4>
@@ -78,9 +82,17 @@
     </div>
     <div class="card-body bg-body-tertiary">
         <div class="d-flex justify-content-end align-items-center">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="trashAdmin" id="trashAdmin" value="1">
-                <label class="form-check-label" for="trashAdmin">Enable Only Trash Admin</label>
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="search" placeholder="Bilal Ajmery" name="search" id="search" />
+                    <label for="floatingInput">Search</label>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="trashAdmin" id="trashAdmin" value="1">
+                    <label class="form-check-label" for="trashAdmin">Enable Only Trash Admin</label>
+                </div>
             </div>
         </div>
 

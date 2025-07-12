@@ -83,15 +83,23 @@
     <div class="card-body bg-body-tertiary">
         <div class="d-flex justify-content-between align-items-center mb-4">
 
-            <div class="col-md-6">
-                <div class="form-floating">
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
                     <select class="form-select" id="roleId" name="roleId" aria-label="Floating label select example">
                     </select>
                     <label for="roleId">Role</label>
                 </div>
             </div>
 
-            <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <div class="col-md-4 px-3">
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="search" placeholder="Bilal Ajmery" name="search" id="search" />
+                    <label for="floatingInput">Search</label>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 d-flex justify-content-end align-items-center">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="trashEmployee" id="trashEmployee" value="1">
                     <label class="form-check-label" for="trashEmployee">Show Only Trashed Employees</label>
@@ -131,6 +139,7 @@
 @include('includes.footer')
 <script>
     getRole();
+
     function getTableData(page = 1, perPage = 10) {
         const thCount = $('#employeeTable thead tr th').length;
         const $tbody = $('#employeeTable tbody');
@@ -263,6 +272,12 @@
     // Initialize search, checkbox handler, and load initial data
     $(document).ready(function() {
         getTableData();
+
+        let searchTimeout;
+        $('#search').on('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => getTableData(), 300);
+        });
 
         $('#trashEmployee, #roleId').on('change', function() {
             getTableData();

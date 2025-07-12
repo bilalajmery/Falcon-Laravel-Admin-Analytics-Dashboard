@@ -9,7 +9,8 @@
                         <div class="col d-md-flex d-lg-block flex-between-center">
                             <h6 class="mb-md-0 mb-lg-2">{{ $label }}</h6>
                             <span class="badge rounded-pill badge-subtle-{{ $color }}">
-                                <i class="fas {{ $label === 'Trash' ? 'fa-trash-alt' : ($label === 'Public' ? 'fa-lock-open' : ($label === 'Private' ? 'fa-lock' : 'fa-layer-group')) }}"></i>
+                                <i
+                                    class="fas {{ $label === 'Trash' ? 'fa-trash-alt' : ($label === 'Public' ? 'fa-lock-open' : ($label === 'Private' ? 'fa-lock' : 'fa-layer-group')) }}"></i>
                             </span>
                         </div>
                         <div class="col-auto">
@@ -37,10 +38,20 @@
         </div>
     </div>
     <div class="card-body bg-body-tertiary">
-        <div class="d-flex justify-content-end align-items-center mb-2">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="trashCategory" id="trashCategory" value="1">
-                <label class="form-check-label" for="trashCategory">Show Only Trashed Categories</label>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div class="col-md-8 px-3">
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="search" placeholder="Search Here..." name="search" id="search" />
+                    <label for="floatingInput">Search</label>
+                </div>
+            </div>
+
+            <div class="col-md-4 d-flex justify-content-end align-items-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="trashCategory" id="trashCategory" value="1">
+                    <label class="form-check-label" for="trashCategory">Show Only Trashed Categories</label>
+                </div>
             </div>
         </div>
 
@@ -84,7 +95,7 @@
                 per_page: perPage,
                 trashCategory: $('#trashCategory').is(':checked') ? 1 : 0,
             },
-            beforeSend: function () {
+            beforeSend: function() {
                 $tbody.html(`
                     <tr>
                         <td colspan="${thCount}">
@@ -98,7 +109,7 @@
                 `);
                 $pagination.html('');
             },
-            success: function (response) {
+            success: function(response) {
                 $tbody.html(response.data);
                 renderPagination(response.pagination);
                 $("#total").text(response.stats.total);
@@ -106,7 +117,7 @@
                 $("#private").text(response.stats.private);
                 $("#trash").text(response.stats.trash);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 const errorMessage = xhr.responseJSON?.message || 'Failed to load categories.';
                 createToast('error', errorMessage);
                 $tbody.html(`
@@ -124,7 +135,14 @@
 
     function renderPagination(pagination) {
         const $pagination = $('#pagination');
-        const { total, per_page, current_page, last_page, from, to } = pagination;
+        const {
+            total,
+            per_page,
+            current_page,
+            last_page,
+            from,
+            to
+        } = pagination;
 
         if (last_page <= 1) {
             $pagination.html('');
@@ -177,7 +195,7 @@
 
         $pagination.html(paginationHtml);
 
-        $pagination.find('button[data-page]').on('click', function () {
+        $pagination.find('button[data-page]').on('click', function() {
             const page = $(this).data('page');
             if (page && !$(this).prop('disabled')) {
                 getTableData(page, per_page);
@@ -185,10 +203,16 @@
         });
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         getTableData();
 
-        $('#trashCategory').on('change', function () {
+        let searchTimeout;
+        $('#search').on('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => getTableData(), 300);
+        });
+
+        $('#trashCategory').on('change', function() {
             getTableData();
         });
     });
