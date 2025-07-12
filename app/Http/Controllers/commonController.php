@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\commonFunction;
 
-use App\Models\{Category, Type, Make};
+use App\Models\{Category, Type, Make, Role};
 
 class commonController extends commonFunction
 {
@@ -38,6 +38,18 @@ class commonController extends commonFunction
 
             $make = Make::where('status', true)->get();
             return response()->json(['error' => false, 'make' => $make]);
+
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function role()
+    {
+        try {
+
+            $role = Role::where('status', true)->get();
+            return response()->json(['error' => false, 'role' => $role]);
 
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);

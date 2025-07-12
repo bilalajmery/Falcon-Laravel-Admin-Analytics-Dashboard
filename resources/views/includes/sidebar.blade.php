@@ -179,6 +179,8 @@
                 <li class="nav-item"><a class="nav-link" href="/subTypes">Sub Types</a></li>
                 <li class="nav-item"><a class="nav-link" href="/make">Makes</a></li>
                 <li class="nav-item"><a class="nav-link" href="/model">Models</a></li>
+                <li class="nav-item"><a class="nav-link" href="/role">Roles</a></li>
+                <li class="nav-item"><a class="nav-link" href="/employee">Employee</a></li>
                 <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
             </ul>
@@ -295,6 +297,28 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="/role" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <i class="far fa-user-circle"></i>
+                            </span>
+                            <span class="nav-link-text ps-1">Roles</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <i class="far fa-user-circle"></i>
+                            </span>
+                            <span class="nav-link-text ps-1">Employee</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="/setting" role="button">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
@@ -329,6 +353,8 @@
             <li class="nav-item"><a class="nav-link" href="/subTypes">Sub Types</a></li>
             <li class="nav-item"><a class="nav-link" href="/make">Makes</a></li>
             <li class="nav-item"><a class="nav-link" href="/model">Models</a></li>
+            <li class="nav-item"><a class="nav-link" href="/role">Roles</a></li>
+            <li class="nav-item"><a class="nav-link" href="/employee">Employee</a></li>
             <li class="nav-item"><a class="nav-link" href="/setting">Setting</a></li>
 
         </ul>

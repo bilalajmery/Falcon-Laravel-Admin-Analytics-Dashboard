@@ -15,6 +15,7 @@ class Admin extends Model
 
     protected $fillable = [
         'uid',
+        'roleId',
         'name',
         'email',
         'phone',
@@ -36,4 +37,9 @@ class Admin extends Model
         'verified' => 'boolean',
         'status' => 'boolean',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roleId', 'uid');
+    }
 }

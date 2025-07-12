@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id('adminId')->comment('Primary key for admin');
             $table->uuid('uid')->unique()->comment('Universally unique identifier for admin');
+            $table->uuid('roleId')->comment('UUID of the role');
 
             $table->string('name', 100)->index()->comment('Full name of the admin');
             $table->string('email')->unique()->comment('Unique email address of the admin');
@@ -27,6 +28,8 @@ return new class extends Migration
             $table->boolean('status')->default(true)->index()->comment('Account status: public or private');
 
             $table->string('password')->comment('Hashed login password');
+
+            $table->enum('type', ['ADMIN', 'EMPLOYEE'])->default('ADMIN')->index()->comment('User type: ADMIN or EMPLOYEE');
 
             $table->timestamps();
             $table->softDeletes()->comment('Soft delete timestamp for recoverable deletion');

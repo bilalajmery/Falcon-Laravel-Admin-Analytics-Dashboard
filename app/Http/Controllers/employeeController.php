@@ -8,48 +8,42 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-class adminController extends commonFunction
+class employeeController extends commonFunction
 {
     public function index(Request $request)
     {
         try {
-
             if ($request->ajax()) {
-                // Base query
-                $query = Admin::select('uid', 'name', 'email', 'phone', 'profile', 'created_at', 'status', 'deleted_at');
+                $query = Admin::with('role')->select('uid', 'name', 'email', 'phone', 'status', 'created_at', 'deleted_at', 'roleId')->where('type', 'EMPLOYEE');
 
-                // ✅ Trash filter
-                if ($request->boolean('trashAdmin')) {
-                    $query = $query->onlyTrashed(); // Only soft-deleted admins
+                if ($request->boolean('trashEmployee')) {
+                    $query = $query->onlyTrashed();
                 }
 
-                // ✅ Search filter
                 if ($request->filled('search')) {
                     $search = $request->input('search');
-                    $query->where(function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%")
-                            ->orWhere('email', 'like', "%{$search}%")
-                            ->orWhere('phone', 'like', "%{$search}%");
-                    });
+                    $query->where('name', 'like', "%{$search}%");
                 }
 
-                // ✅ Pagination
-                $page = $request->input('page', 1);
+                if ($request->filled('roleId')) {
+                    $query->where('roleId', $request->roleId);
+                }
+
                 $perPage = $request->input('per_page', 10);
+                $page = $request->input('page', 1);
+
                 $data = $query->orderBy('created_at', $request->input('orderBy', 'DESC'))
                     ->paginate($perPage, ['*'], 'page', $page);
 
-                // ✅ Status stats (always from full set including trashed)
                 $stats = [
-                    'total' => Admin::where('type', 'ADMIN')->withTrashed()->count(),
-                    'public' => Admin::where([['status', true], ['type', 'ADMIN']])->count(),
-                    'private' => Admin::where([['status', false], ['type', 'ADMIN']])->count(),
-                    'trash' => Admin::where('type', 'ADMIN')->onlyTrashed()->count(),
+                    'total' => Admin::where('type', 'EMPLOYEE')->withTrashed()->count(),
+                    'public' => Admin::where([['status', true], ['type', 'EMPLOYEE']])->count(),
+                    'private' => Admin::where([['status', false], ['type', 'EMPLOYEE']])->count(),
+                    'trash' => Admin::where('type', 'EMPLOYEE')->onlyTrashed()->count(),
                 ];
 
-                // ✅ Return full response
                 return response()->json([
-                    'data' => view('admin.append', ['data' => $data])->render(),
+                    'data' => view('employee.append', ['data' => $data])->render(),
                     'pagination' => [
                         'total' => $data->total(),
                         'per_page' => $data->perPage(),
@@ -64,32 +58,27 @@ class adminController extends commonFunction
                 ]);
             }
 
-            return view('admin.index');
+            return view('employee.index');
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         try {
-            return view('admin.create');
+            return view('employee.create');
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         try {
             // ✅ Step 1: Validate input
             $validated = $request->validate([
+                'roleId' => 'required|string|max:255|exists:roles,uid',
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:admins,email',
                 'phone' => 'required|string|max:20|unique:admins,phone',
@@ -100,7 +89,7 @@ class adminController extends commonFunction
             // ✅ Step 2: Handle image upload
             $profilePath = null;
             if ($request->hasFile('profile')) {
-                $response = $this->storeImage($request->file('profile'), 'uploads/admin/profile');
+                $response = $this->storeImage($request->file('profile'), 'uploads/employee/profile');
 
                 if (!empty($response['error'])) {
                     return response()->json([
@@ -112,19 +101,21 @@ class adminController extends commonFunction
                 $profilePath = $response['path'];
             }
 
-            // ✅ Step 3: Create admin
+            // ✅ Step 3: Create employee
             Admin::create([
                 'uid' => (string) $this->uIdGenerate(),
+                'roleId' => $validated['roleId'],
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'],
                 'password' => Hash::make($validated['password']),
                 'profile' => $profilePath,
+                'type' => 'EMPLOYEE',
             ]);
 
             return response()->json([
                 'error' => false,
-                'message' => 'Admin created successfully.',
+                'message' => 'Employee created successfully.',
             ], 201);
 
         } catch (\Illuminate\Validation\ValidationException $th) {
@@ -143,38 +134,16 @@ class adminController extends commonFunction
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $uid)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $uid)
     {
         try {
-
-            $admin = Admin::where('uid', $uid)->first();
-
-            if (!$admin) {
-                return redirect("/404");
-            }
-
-            return view('admin.edit', compact('admin'));
-
+            $employee = Admin::where('uid', $uid)->firstOrFail();
+            return view('employee.edit', compact('employee'));
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);
         }
-
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $uid)
     {
         try {
@@ -183,12 +152,13 @@ class adminController extends commonFunction
             if (!$admin) {
                 return response()->json([
                     'error' => true,
-                    'message' => 'Admin not found.',
+                    'message' => 'Employee not found.',
                 ], 404);
             }
 
             // ✅ Step 2: Validate input
             $validated = $request->validate([
+                'roleId' => 'required|string|max:255|exists:roles,uid',
                 'name' => 'required|string|max:255',
                 'email' => ['required', 'email', 'max:255', Rule::unique('admins', 'email')->ignore($admin->uid, 'uid')],
                 'phone' => ['required', 'string', 'max:20', Rule::unique('admins', 'phone')->ignore($admin->uid, 'uid')],
@@ -218,11 +188,12 @@ class adminController extends commonFunction
                 'phone' => $validated['phone'],
                 'password' => isset($validated['password']) ? Hash::make($validated['password']) : $admin->password,
                 'profile' => $profilePath,
+                'roleId' => $validated['roleId'],
             ]);
 
             return response()->json([
                 'error' => false,
-                'message' => 'Admin updated successfully.',
+                'message' => 'Employee updated successfully.',
             ], 200);
 
         } catch (\Illuminate\Validation\ValidationException $th) {
@@ -241,40 +212,23 @@ class adminController extends commonFunction
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $uid)
     {
         try {
-            // Include trashed records in the search
-            $admin = Admin::withTrashed()->where('uid', $uid)->first();
+            $role = Admin::withTrashed()->where('uid', $uid)->firstOrFail();
 
-            if (!$admin) {
-                return response()->json([
-                    'error' => true,
-                    'message' => 'Admin not found',
-                ], 404);
-            }
-
-            if ($admin->trashed()) {
-                // ✅ Restore if already deleted
-                $admin->restore();
-
-                return response()->json([
-                    'error' => false,
-                    'message' => 'Admin restored successfully',
-                ]);
+            if ($role->trashed()) {
+                $role->restore();
+                $message = 'Role restored successfully.';
             } else {
-                // ✅ Soft delete otherwise
-                $admin->delete();
-
-                return response()->json([
-                    'error' => false,
-                    'message' => 'Admin deleted successfully',
-                ]);
+                $role->delete();
+                $message = 'Role deleted successfully.';
             }
 
+            return response()->json([
+                'error' => false,
+                'message' => $message,
+            ]);
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);
         }
@@ -284,31 +238,16 @@ class adminController extends commonFunction
     {
         try {
 
-            $admin = Admin::where('uid', $uid)->first();
-
-            if (!$admin) {
-                return response()->json([
-                    'error' => true,
-                    'message' => 'Admin not found',
-                ]);
-            }
-
-            if ($admin->status) {
-                $admin->status = false;
-            } else {
-                $admin->status = true;
-            }
-
-            $admin->save();
+            $role = Admin::where('uid', $uid)->firstOrFail();
+            $role->status = !$role->status;
+            $role->save();
 
             return response()->json([
                 'error' => false,
-                'message' => 'Admin Status Updated successfully',
+                'message' => 'Role status updated successfully.',
             ]);
         } catch (\Throwable $th) {
-            // Handle exceptions
             return $this->tryCatchResponse($th);
         }
     }
-
 }

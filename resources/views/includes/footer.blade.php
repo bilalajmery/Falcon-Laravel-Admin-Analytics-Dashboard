@@ -273,6 +273,33 @@
                 $makeSelect.html(`<option value="" disabled selected>No makes found</option>`).prop('disabled', false);
             });
     }
+
+    function getRole(roleId = 0) {
+        const $roleSelect = $("select[name='roleId']");
+
+        $roleSelect.prop('disabled', true).html(`<option value="">Fetching Roles...</option>`);
+
+        $.ajax({
+                method: "GET",
+                url: '/common/role',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            .done(function(response) {
+                const roles = response.role || [];
+                let options = `<option value="" disabled selected>${roles.length ? "Select Role" : "No Roles found"}</option>`;
+                for (const role of roles) {
+                    const selected = role.uid == roleId ? 'selected' : '';
+                    options += `<option value="${role.uid}" ${selected}>${role.name}</option>`;
+                }
+                $roleSelect.html(options).prop('disabled', false);
+            })
+            .fail(function() {
+                createToast('error', 'Failed to load roles. Please try again.');
+                $roleSelect.html(`<option value="" disabled selected>No roles found</option>`).prop('disabled', false);
+            });
+    }
 </script>
 
 </body>

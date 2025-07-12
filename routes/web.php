@@ -10,6 +10,8 @@ use App\Http\Controllers\typeController;
 use App\Http\Controllers\subTypeController;
 use App\Http\Controllers\makeController;
 use App\Http\Controllers\modelController;
+use App\Http\Controllers\roleController;
+use App\Http\Controllers\employeeController;
 use App\Http\Controllers\settingController;
 use App\Http\Controllers\commonController;
 
@@ -58,6 +60,14 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
     Route::resource('model', modelController::class);
     Route::patch('model/{uid}/status', [modelController::class, 'status']);
 
+    Route::resource('role', roleController::class);
+    Route::patch('role/{uid}/status', [roleController::class, 'status']);
+    Route::get('role/permission/{uid}', [roleController::class, 'permission']);
+    Route::post('role/permission', [roleController::class, 'permissionSave']);
+
+    Route::resource('employee', employeeController::class);
+    Route::patch('employee/{uid}/status', [employeeController::class, 'status']);
+
     Route::get('setting', [settingController::class, 'index']);
     Route::post('setting/personal', [settingController::class, 'personal']);
     Route::post('setting/twoStepVerification', [settingController::class, 'twoStepVerification']);
@@ -69,6 +79,7 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
     Route::get('/common/category', [commonController::class, 'category']);
     Route::get('/common/type', [commonController::class, 'type']);
     Route::get('/common/make', [commonController::class, 'make']);
+    Route::get('/common/role', [commonController::class, 'role']);
 
 });
 
