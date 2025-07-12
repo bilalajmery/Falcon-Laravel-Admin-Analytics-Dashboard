@@ -32,7 +32,7 @@ class authController extends commonFunction
             ]);
 
             // Fetch admin by email
-            $admin = Admin::where('email', $request->email)->first();
+            $admin = Admin::with(['role'])->where('email', $request->email)->first();
 
             // Check if admin exists
             if (!$admin) {
@@ -84,6 +84,8 @@ class authController extends commonFunction
                 'cover' => $admin->cover,
                 'twoStepVerification' => $admin->twoStepVerification,
                 'phone' => $admin->phone,
+                'type' => $admin->type,
+                'role' => $admin->role?->name,
             ]);
 
             return response()->json([
