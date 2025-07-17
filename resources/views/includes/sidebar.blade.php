@@ -157,7 +157,7 @@
                             <a class="dropdown-item fw-bold text-warning" href="#!">
                                 <span class="fas fa-crown me-1"></span>
                                 <span>{{ Session::GET('adminSession.name') }}</span>
-                                <br> <span style="margin-left: 23px; font-size: 13px;">{{ Session::GET('adminSession.role') }}</span>
+                                <br> <span style="margin-left: 23px; font-size: 13px;">{{ Session::GET('adminSession.role') ?? 'ADMIN' }}</span>
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/setting">Settings</a>
@@ -486,7 +486,7 @@
                     <a class="dropdown-item fw-bold text-warning" href="#!">
                         <span class="fas fa-crown me-1"></span>
                         <span>{{ Session::GET('adminSession.name') }}</span>
-                        <br> <span style="margin-left: 23px; font-size: 13px;">{{ Session::GET('adminSession.role') }}</span>
+                        <br> <span style="margin-left: 23px; font-size: 13px;">{{ Session::GET('adminSession.role') ?? 'ADMIN' }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/setting">Settings</a>

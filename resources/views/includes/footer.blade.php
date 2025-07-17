@@ -204,8 +204,6 @@
                 }
             })
             .done(function(response) {
-
-                // Define all possible permission keys used in the sidebar
                 const relativeItems = [
                     'home',
                     'category',
@@ -213,32 +211,36 @@
                     'type',
                     'subType',
                     'make',
-                    'model',
+                    'model'
                 ];
 
                 const adminOnlyItems = [
                     'admin',
                     'role',
-                    'employee',
+                    'employee'
                 ];
 
-                if (response.admin.type === "ADMIN") {
-                    relativeItems.forEach(function(key) {
-                        $('.nav-item-' + key).removeClass('d-none');
-                    });
-                    adminOnlyItems.forEach(function(key) {
-                        $('.nav-item-' + key).removeClass('d-none');
-                    });
-                }
+                // Show a sidebar item by removing the 'd-none' class
+                const showItem = key => $('.nav-item-' + key).removeClass('d-none');
 
-                if (response.admin.type === "EMPLOYEE") {
-                    const permissions = response.admin.role.permission ? JSON.parse(response.admin.role.permission) : {};
-                    relativeItems.forEach(function(key) {
-                        if (!permissions[key]) {
-                            $('.nav-item-' + key).remove(); // Remove the sidebar item if permission is missing
-                        } else {
-                            $('.nav-item-' + key).removeClass('d-none');
-                        }
+                // Remove a sidebar item
+                const removeItem = key => $('.nav-item-' + key).remove();
+
+                const {
+                    admin
+                } = response;
+
+                if (admin?.type === "ADMIN") {
+                    [...relativeItems, ...adminOnlyItems].forEach(showItem);
+                } else if (admin?.type === "EMPLOYEE") {
+                    const permissions = admin.role?.permission ? JSON.parse(admin.role.permission) : {};
+
+                    relativeItems.forEach(key => {
+                        permissions[key] ? showItem(key) : removeItem(key);
+                    });
+
+                    adminOnlyItems.forEach(key => {
+                        removeItem(key);
                     });
                 }
             })
@@ -246,6 +248,7 @@
                 createToast('error', 'Failed to load sidebar. Please try again.');
             });
     }
+
 
 
     function getCategory(categoryId = 0) {
