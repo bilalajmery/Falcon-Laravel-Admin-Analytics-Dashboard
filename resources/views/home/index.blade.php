@@ -70,9 +70,7 @@
         </div>
     </div>
 
-</div>
 
-<div class="row g-3 mb-3">
 
     <div class="col-sm-6 col-md-4">
         <div class="card h-md-100 ecommerce-card-min-width">
@@ -100,13 +98,13 @@
         <div class="card h-md-100">
             <div class="card-header pb-0">
                 <h6 class="mb-0 mt-2">Total Order</h6>
+                <div class="col-auto align-self-end">
+                    <div class="fs-5 fw-normal font-sans-serif text-700 lh-1 mb-1">58.4K</div>
+                    <span class="badge rounded-pill fs-11 bg-200 text-primary"><span class="fas fa-caret-up me-1"></span>13.6%</span>
+                </div>
             </div>
             <div class="card-body d-flex flex-column justify-content-end">
                 <div class="row justify-content-between">
-                    <div class="col-auto align-self-end">
-                        <div class="fs-5 fw-normal font-sans-serif text-700 lh-1 mb-1">58.4K</div>
-                        <span class="badge rounded-pill fs-11 bg-200 text-primary"><span class="fas fa-caret-up me-1"></span>13.6%</span>
-                    </div>
                     <div class="col-auto ps-0 mt-n4">
                         <div class="echart-default-total-order"
                             data-echarts='{"tooltip":{"trigger":"axis","formatter":"{b0} : {c0}"},"xAxis":{"data":["Week 4","Week 5","Week 6","Week 7"]},"series":[{"type":"line","data":[20,40,100,20],"smooth":true,"lineStyle":{"width":3}}],"grid":{"bottom":"2%","top":"2%","right":"0","left":"10px"}}'
@@ -157,7 +155,7 @@
 
 <div class="row g-0">
 
-    <div class="col-12 ps-lg-2 mb-3">
+    <div class="col-12  mb-3">
         <div class="card h-lg-100">
             <div class="card-header">
                 <div class="row flex-between-center">

@@ -63,23 +63,23 @@
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <input class="form-control" type="email" placeholder="name@example.com" name="email" value="{{ $admin->email }}" />
                         <label for="floatingInput">Email</label>
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-6">
                     <div class="form-floating">
                         <input class="form-control" type="password" id="password" placeholder="Password" name="password" />
                         <label for="password">Password (leave blank to keep unchanged)</label>
                     </div>
                 </div>
 
-                <div class="col-md-6 mt-5">
+                <div class="col-md-6 mt-4">
                     <!-- Profile Card -->
-                    <div class="card shadow-md">
+                    <div class="card shadow-sm">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">Profile</h5>

@@ -9,7 +9,7 @@
                 <img src="{{ $d->profile ?? asset('assets/img/elearning/avatar/student.png') }}" alt="Profile Image"
                     style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;">
             </div>
-            <span>{{ $d->name }}</span>
+            <span class="text-nowrap">{{ $d->name }}</span>
         </td>
         <td>{{ $d->email }}</td>
         <td>{{ $d->phone }}</td>

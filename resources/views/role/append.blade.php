@@ -45,7 +45,7 @@
     </tr>
     @php $i++; @endphp
 @empty
-    <tr class="text-center">
+    <tr class="text-center small">
         <td colspan="5">No Roles Found</td>
     </tr>
 @endforelse

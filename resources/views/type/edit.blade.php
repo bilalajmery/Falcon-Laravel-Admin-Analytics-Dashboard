@@ -23,7 +23,7 @@
 
                 <div class="col-md-4 mt-md-0 mt-4">
                     <!-- Image Card -->
-                    <div class="card shadow-md">
+                    <div class="card shadow-sm">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">Type Image</h5>

@@ -45,7 +45,7 @@
     </tr>
     @php $i++; @endphp
 @empty
-    <tr class="text-center">
+    <tr class="text-center small">
         <td colspan="6">No Sub Types Found</td>
     </tr>
 @endforelse

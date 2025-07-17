@@ -1,8 +1,8 @@
 @include('includes.header')
 
-<div class="row mb-4">
+<div class="row mb-2">
     @foreach (['Total' => 'warning', 'Public' => 'success', 'Private' => 'danger', 'Trash' => 'danger'] as $label => $color)
-        <div class="col-md-3">
+        <div class="col-md-3 mb-3">
             <div class="card h-100">
                 <div class="card-body">
                     <div class="row flex-between-center">
@@ -67,10 +67,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Model Name</th>
-                        <th>Parent Make</th>
+                        <th class="text-nowrap">Model Name</th>
+                        <th class="text-nowrap">Parent Make</th>
                         <th>Status</th>
-                        <th>Date & Time</th>
+                        <th class="text-nowrap">Date & Time</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>

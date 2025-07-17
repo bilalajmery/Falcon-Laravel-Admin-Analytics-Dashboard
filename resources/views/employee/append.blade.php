@@ -44,7 +44,7 @@
         $i++;
     @endphp
 @empty
-    <tr class="text-center">
+    <tr class="text-center small">
         <td colspan="7">No Employes Found</td>
     </tr>
 @endforelse

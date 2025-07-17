@@ -1,7 +1,7 @@
 @include('includes.header')
 
-<div class="row mb-4">
-    <div class="col-md-3">
+<div class="row mb-2">
+    <div class="col-sm-6 col-md-3 mb-3">
         <div class="card h-100">
             <div class="card-body">
                 <div class="row flex-between-center">
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-sm-6 col-md-3 mb-3">
         <div class="card h-100">
             <div class="card-body">
                 <div class="row flex-between-center">
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-sm-6 col-md-3 mb-3">
         <div class="card h-100">
             <div class="card-body">
                 <div class="row flex-between-center">
@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-sm-6 col-md-3 mb-3">
         <div class="card h-100">
             <div class="card-body">
                 <div class="row flex-between-center">
@@ -74,9 +74,9 @@
             </div>
             <div class="col-auto ms-auto">
                 <a href="/employee/create">
-                    <button class="btn btn-primary" style="padding: 2px 5px;"><i class="fas fa-plus"></i></button>
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i></button>
                 </a>
-                <button class="btn btn-primary" style="padding: 2px 5px;" onclick="getTableData()"><i class="fas fa-undo"></i></button>
+                <button class="btn btn-primary" onclick="getTableData()"><i class="fas fa-undo"></i></button>
             </div>
         </div>
     </div>
@@ -117,7 +117,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Date & Time</th>
+                        <th scope="col"><span class="text-nowrap">Date & Time</span></th>
                         <th class="text-end" scope="col"></th>
                     </tr>
                 </thead>
