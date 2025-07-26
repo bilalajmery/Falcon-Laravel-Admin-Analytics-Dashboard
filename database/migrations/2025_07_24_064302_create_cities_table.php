@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name')->comment('Name of the city');
             $table->uuid('countryId')->comment('UUID reference to the parent country');
             $table->uuid('stateId')->comment('UUID reference to the parent state');
-            $table->foreign('stateId')->references('uid')->on('states')->onDelete('cascade')->comment('Foreign key to states table');
             $table->timestamps();
             $table->softDeletes()->comment('Soft deletion timestamp');
         });

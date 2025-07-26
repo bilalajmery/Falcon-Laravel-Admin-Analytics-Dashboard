@@ -6,8 +6,8 @@
         <td class="d-flex align-items-center gap-2">
             <span>{{ $d->name }}</span>
         </td>
-        <td>{{ $d->state->name }}</td>
-        <td>{{ $d->country->name }}</td>
+        <td>{{ $d->state?->name }}</td>
+        <td>{{ $d->country?->name }}</td>
         <td>{{ $d->created_at->format('M d, Y - h:i A') }}</td>
         <td class="text-end">
             <div class="dropdown font-sans-serif position-static">

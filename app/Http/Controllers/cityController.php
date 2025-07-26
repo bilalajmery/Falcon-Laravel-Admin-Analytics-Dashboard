@@ -13,43 +13,38 @@ class cityController extends commonFunction
     {
         try {
             if ($request->ajax()) {
-                $query = City::with(['country', 'state'])
-                    ->select('cities.uid', 'cities.name', 'cities.stateId', 'cities.countryId', 'cities.created_at', 'cities.deleted_at')
-                    ->leftJoin('countries', 'cities.countryId', '=', 'countries.uid')
-                    ->leftJoin('states', 'cities.stateId', '=', 'states.stateId');
+                $query = City::with(['country', 'state'])->select('uid', 'name', 'stateId', 'countryId', 'created_at', 'deleted_at');
 
                 if ($request->boolean('trashCity')) {
                     $query = $query->onlyTrashed();
                 }
 
                 if ($request->filled('stateId')) {
-                    $query = $query->where('cities.stateId', $request->stateId);
+                    $query = $query->where('stateId', $request->stateId);
                 }
 
                 if ($request->filled('countryId')) {
-                    $query = $query->where('cities.countryId', $request->countryId);
+                    $query = $query->where('countryId', $request->countryId);
                 }
 
                 if ($request->filled('search')) {
                     $search = $request->input('search');
                     $query->where(function ($q) use ($search) {
-                        $q->where('cities.name', 'like', "%{$search}%")
-                            ->orWhere('states.name', 'like', "%{$search}%")
-                            ->orWhere('countries.name', 'like', "%{$search}%");
+                        $q->where('name', 'like', "%{$search}%");
                     });
                 }
 
                 $perPage = $request->input('per_page', 10);
                 $page = $request->input('page', 1);
 
-                $data = $query->orderBy('cities.created_at', $request->input('orderBy', 'DESC'))
+                $data = $query->orderBy('created_at', $request->input('orderBy', 'DESC'))
                     ->paginate($perPage, ['*'], 'page', $page);
 
                 $stats = [
                     'total' => City::withTrashed()->count(),
                     'trash' => City::onlyTrashed()->count(),
                 ];
-
+                // dd($data);
                 return response()->json([
                     'data' => view('city.append', ['data' => $data])->render(),
                     'pagination' => [

@@ -4,169 +4,115 @@ namespace Database\Seeders;
 
 use App\Models\City;
 use App\Models\State;
+use App\Models\Country;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class CitySeeder extends Seeder
 {
     /**
-     * Seed the cities table with major cities from Pakistan's provinces and territories.
+     * Seed the cities table with major cities from multiple countries.
      */
     public function run()
     {
-        $cities = [
-            // Punjab
-            ['name' => 'Lahore', 'state_code' => 'PB'],
-            ['name' => 'Faisalabad', 'state_code' => 'PB'],
-            ['name' => 'Rawalpindi', 'state_code' => 'PB'],
-            ['name' => 'Multan', 'state_code' => 'PB'],
-            ['name' => 'Gujranwala', 'state_code' => 'PB'],
-            ['name' => 'Sialkot', 'state_code' => 'PB'],
-            ['name' => 'Bahawalpur', 'state_code' => 'PB'],
-            ['name' => 'Sargodha', 'state_code' => 'PB'],
-            ['name' => 'Sheikhupura', 'state_code' => 'PB'],
-            ['name' => 'Rahim Yar Khan', 'state_code' => 'PB'],
+        // Fetch all countries and states once for lookup
+        $countries = Country::pluck('uid', 'code')->toArray();
+        $states = State::pluck('uid', 'code')->toArray();
 
-            // Sindh
-            ['name' => 'Karachi', 'state_code' => 'SD'],
-            ['name' => 'Hyderabad', 'state_code' => 'SD'],
-            ['name' => 'Sukkur', 'state_code' => 'SD'],
-            ['name' => 'Larkana', 'state_code' => 'SD'],
-            ['name' => 'Nawabshah', 'state_code' => 'SD'],
-            ['name' => 'Mirpur Khas', 'state_code' => 'SD'],
-            ['name' => 'Shikarpur', 'state_code' => 'SD'],
-            ['name' => 'Jacobabad', 'state_code' => 'SD'],
-            ['name' => 'Thatta', 'state_code' => 'SD'],
-            ['name' => 'Badin', 'state_code' => 'SD'],
-            ['name' => 'Tando Allahyar', 'state_code' => 'SD'],
-            ['name' => 'Tando Muhammad Khan', 'state_code' => 'SD'],
-            ['name' => 'Khairpur', 'state_code' => 'SD'],
-            ['name' => 'Dadu', 'state_code' => 'SD'],
-            ['name' => 'Sanghar', 'state_code' => 'SD'],
-            ['name' => 'Jamshoro', 'state_code' => 'SD'],
-            ['name' => 'Umerkot', 'state_code' => 'SD'],
-            ['name' => 'Ghotki', 'state_code' => 'SD'],
-            ['name' => 'Kashmore', 'state_code' => 'SD'],
-            ['name' => 'Matiari', 'state_code' => 'SD'],
-            ['name' => 'Naushahro Feroze', 'state_code' => 'SD'],
-            ['name' => 'Qambar Shahdadkot', 'state_code' => 'SD'],
-            ['name' => 'Mithi', 'state_code' => 'SD'],
-            ['name' => 'Sajawal', 'state_code' => 'SD'],
-            ['name' => 'Tando Adam', 'state_code' => 'SD'],
-            ['name' => 'Sehwan', 'state_code' => 'SD'],
-            ['name' => 'Kotri', 'state_code' => 'SD'],
-            ['name' => 'Rohri', 'state_code' => 'SD'],
-            ['name' => 'Daharki', 'state_code' => 'SD'],
-            ['name' => 'Kandhkot', 'state_code' => 'SD'],
-            ['name' => 'Hala', 'state_code' => 'SD'],
-            ['name' => 'Mehar', 'state_code' => 'SD'],
-            ['name' => 'Shahdadpur', 'state_code' => 'SD'],
-            ['name' => 'Khairpur Nathan Shah', 'state_code' => 'SD'],
-            ['name' => 'Tando Jam', 'state_code' => 'SD'],
-            ['name' => 'Pano Aqil', 'state_code' => 'SD'],
-            ['name' => 'Khipro', 'state_code' => 'SD'],
-            ['name' => 'Moro', 'state_code' => 'SD'],
-            ['name' => 'Sujawal', 'state_code' => 'SD'],
-            ['name' => 'Tando Ghulam Ali', 'state_code' => 'SD'],
-            ['name' => 'Digri', 'state_code' => 'SD'],
-            ['name' => 'Kunri', 'state_code' => 'SD'],
-            ['name' => 'Chachro', 'state_code' => 'SD'],
-            ['name' => 'Nagarparkar', 'state_code' => 'SD'],
-            ['name' => 'Diplo', 'state_code' => 'SD'],
-            ['name' => 'Islamkot', 'state_code' => 'SD'],
-            ['name' => 'Jhudo', 'state_code' => 'SD'],
-            ['name' => 'Samaro', 'state_code' => 'SD'],
-            ['name' => 'Pithoro', 'state_code' => 'SD'],
-            ['name' => 'Tando Bago', 'state_code' => 'SD'],
-            ['name' => 'Talhar', 'state_code' => 'SD'],
-            ['name' => 'Jati', 'state_code' => 'SD'],
-            ['name' => 'Mirpur Sakro', 'state_code' => 'SD'],
-            ['name' => 'Ghorabari', 'state_code' => 'SD'],
-            ['name' => 'Keti Bandar', 'state_code' => 'SD'],
-            ['name' => 'Khairpur Mirs', 'state_code' => 'SD'],
-            ['name' => 'Gambat', 'state_code' => 'SD'],
-            ['name' => 'Sobhodero', 'state_code' => 'SD'],
-            ['name' => 'Ranipur', 'state_code' => 'SD'],
-            ['name' => 'Thul', 'state_code' => 'SD'],
-            ['name' => 'Garhi Khairo', 'state_code' => 'SD'],
-            ['name' => 'Ratodero', 'state_code' => 'SD'],
-            ['name' => 'Dokri', 'state_code' => 'SD'],
-            ['name' => 'Naudero', 'state_code' => 'SD'],
-            ['name' => 'Bhirkan', 'state_code' => 'SD'],
-            ['name' => 'Kandiaro', 'state_code' => 'SD'],
-            ['name' => 'Bhit Shah', 'state_code' => 'SD'],
-            ['name' => 'Sakrand', 'state_code' => 'SD'],
-            ['name' => 'Tando Yousuf', 'state_code' => 'SD'],
-            ['name' => 'Shahpur Chakar', 'state_code' => 'SD'],
-            ['name' => 'Sinjhoro', 'state_code' => 'SD'],
-            ['name' => 'Jhol', 'state_code' => 'SD'],
-            ['name' => 'Khudian', 'state_code' => 'SD'],
-            ['name' => 'Daur', 'state_code' => 'SD'],
-            ['name' => 'Mehrabpur', 'state_code' => 'SD'],
-            ['name' => 'Mirwah Gorchani', 'state_code' => 'SD'],
-            ['name' => 'Madeji', 'state_code' => 'SD'],
-            ['name' => 'Garhi Yasin', 'state_code' => 'SD'],
-            ['name' => 'Khanpur', 'state_code' => 'SD'],
-            ['name' => 'Shikarpur City', 'state_code' => 'SD'],
-            ['name' => 'Lakhi', 'state_code' => 'SD'],
-            ['name' => 'Ubauro', 'state_code' => 'SD'],
-            ['name' => 'Mirpur Mathelo', 'state_code' => 'SD'],
-            ['name' => 'Khan Bela', 'state_code' => 'SD'],
-            ['name' => 'Tando Masti Khan', 'state_code' => 'SD'],
-            ['name' => 'Hingorja', 'state_code' => 'SD'],
-            ['name' => 'Kot Diji', 'state_code' => 'SD'],
-            ['name' => 'Faqirabad', 'state_code' => 'SD'],
-            ['name' => 'Kumb', 'state_code' => 'SD'],
-            ['name' => 'Kingri', 'state_code' => 'SD'],
-            ['name' => 'Thari Mirwah', 'state_code' => 'SD'],
-            ['name' => 'Pirjo Goth', 'state_code' => 'SD'],
-            ['name' => 'Sann', 'state_code' => 'SD'],
-            ['name' => 'Johi', 'state_code' => 'SD'],
-            ['name' => 'Bhan Saeedabad', 'state_code' => 'SD'],
-            ['name' => 'Darbelo', 'state_code' => 'SD'],
-            ['name' => 'Chuhar Jamali', 'state_code' => 'SD'],
-            ['name' => 'Bulri Shah Karim', 'state_code' => 'SD'],
-            ['name' => 'Matli', 'state_code' => 'SD'],
-            ['name' => 'Daro', 'state_code' => 'SD'],
-            // Khyber Pakhtunkhwa
-            ['name' => 'Peshawar', 'state_code' => 'KP'],
-            ['name' => 'Mardan', 'state_code' => 'KP'],
-            ['name' => 'Abbottabad', 'state_code' => 'KP'],
-            ['name' => 'Mingora', 'state_code' => 'KP'],
-            ['name' => 'Kohat', 'state_code' => 'KP'],
-            ['name' => 'Bannu', 'state_code' => 'KP'],
-            ['name' => 'Dera Ismail Khan', 'state_code' => 'KP'],
-            ['name' => 'Mansehra', 'state_code' => 'KP'],
-            // Balochistan
-            ['name' => 'Quetta', 'state_code' => 'BL'],
-            ['name' => 'Gwadar', 'state_code' => 'BL'],
-            ['name' => 'Turbat', 'state_code' => 'BL'],
-            ['name' => 'Sibi', 'state_code' => 'BL'],
-            ['name' => 'Chaman', 'state_code' => 'BL'],
-            ['name' => 'Zhob', 'state_code' => 'BL'],
-            ['name' => 'Khuzdar', 'state_code' => 'BL'],
-            // Islamabad Capital Territory
-            ['name' => 'Islamabad', 'state_code' => 'ICT'],
-            // Azad Jammu and Kashmir
-            ['name' => 'Muzaffarabad', 'state_code' => 'AJK'],
-            ['name' => 'Mirpur', 'state_code' => 'AJK'],
-            ['name' => 'Rawalakot', 'state_code' => 'AJK'],
-            ['name' => 'Bagh', 'state_code' => 'AJK'],
-            ['name' => 'Kotli', 'state_code' => 'AJK'],
-            // Gilgit-Baltistan
-            ['name' => 'Gilgit', 'state_code' => 'GB'],
-            ['name' => 'Skardu', 'state_code' => 'GB'],
-            ['name' => 'Chilas', 'state_code' => 'GB'],
-            ['name' => 'Khaplu', 'state_code' => 'GB'],
+        $cities = [
+            // Pakistan - Punjab (PB)
+            ['name' => 'Lahore', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Faisalabad', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Rawalpindi', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Multan', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Gujranwala', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Sialkot', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Bahawalpur', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Sargodha', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Sheikhupura', 'state_code' => 'PB', 'country_code' => 'PK'],
+            ['name' => 'Rahim Yar Khan', 'state_code' => 'PB', 'country_code' => 'PK'],
+            // Pakistan - Sindh (SD)
+            ['name' => 'Karachi', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Hyderabad', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Sukkur', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Larkana', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Nawabshah', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Mirpur Khas', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Shikarpur', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Jacobabad', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Thatta', 'state_code' => 'SD', 'country_code' => 'PK'],
+            ['name' => 'Badin', 'state_code' => 'SD', 'country_code' => 'PK'],
+            // Pakistan - Khyber Pakhtunkhwa (KP)
+            ['name' => 'Peshawar', 'state_code' => 'KP', 'country_code' => 'PK'],
+            ['name' => 'Mardan', 'state_code' => 'KP', 'country_code' => 'PK'],
+            ['name' => 'Abbottabad', 'state_code' => 'KP', 'country_code' => 'PK'],
+            ['name' => 'Mingora', 'state_code' => 'KP', 'country_code' => 'PK'],
+            ['name' => 'Kohat', 'state_code' => 'KP', 'country_code' => 'PK'],
+            // Pakistan - Balochistan (BL)
+            ['name' => 'Quetta', 'state_code' => 'BL', 'country_code' => 'PK'],
+            ['name' => 'Gwadar', 'state_code' => 'BL', 'country_code' => 'PK'],
+            ['name' => 'Turbat', 'state_code' => 'BL', 'country_code' => 'PK'],
+            ['name' => 'Sibi', 'state_code' => 'BL', 'country_code' => 'PK'],
+            ['name' => 'Chaman', 'state_code' => 'BL', 'country_code' => 'PK'],
+            // Pakistan - Islamabad Capital Territory (ICT)
+            ['name' => 'Islamabad', 'state_code' => 'ICT', 'country_code' => 'PK'],
+            // Pakistan - Azad Jammu and Kashmir (AJK)
+            ['name' => 'Muzaffarabad', 'state_code' => 'AJK', 'country_code' => 'PK'],
+            ['name' => 'Mirpur', 'state_code' => 'AJK', 'country_code' => 'PK'],
+            ['name' => 'Rawalakot', 'state_code' => 'AJK', 'country_code' => 'PK'],
+            // Pakistan - Gilgit-Baltistan (GB)
+            ['name' => 'Gilgit', 'state_code' => 'GB', 'country_code' => 'PK'],
+            ['name' => 'Skardu', 'state_code' => 'GB', 'country_code' => 'PK'],
+            // United States - California (CA)
+            ['name' => 'Los Angeles', 'state_code' => 'CA', 'country_code' => 'US'],
+            ['name' => 'San Francisco', 'state_code' => 'CA', 'country_code' => 'US'],
+            ['name' => 'San Diego', 'state_code' => 'CA', 'country_code' => 'US'],
+            ['name' => 'Sacramento', 'state_code' => 'CA', 'country_code' => 'US'],
+            // United States - Texas (TX)
+            ['name' => 'Houston', 'state_code' => 'TX', 'country_code' => 'US'],
+            ['name' => 'Austin', 'state_code' => 'TX', 'country_code' => 'US'],
+            ['name' => 'Dallas', 'state_code' => 'TX', 'country_code' => 'US'],
+            // United States - New York (NY)
+            ['name' => 'New York City', 'state_code' => 'NY', 'country_code' => 'US'],
+            ['name' => 'Buffalo', 'state_code' => 'NY', 'country_code' => 'US'],
+            // India - Maharashtra (MH)
+            ['name' => 'Mumbai', 'state_code' => 'MH', 'country_code' => 'IN'],
+            ['name' => 'Pune', 'state_code' => 'MH', 'country_code' => 'IN'],
+            ['name' => 'Nagpur', 'state_code' => 'MH', 'country_code' => 'IN'],
+            // India - Delhi (DL)
+            ['name' => 'New Delhi', 'state_code' => 'DL', 'country_code' => 'IN'],
+            ['name' => 'Delhi', 'state_code' => 'DL', 'country_code' => 'IN'],
+            // India - Karnataka (KA)
+            ['name' => 'Bengaluru', 'state_code' => 'KA', 'country_code' => 'IN'],
+            ['name' => 'Mysuru', 'state_code' => 'KA', 'country_code' => 'IN'],
         ];
 
+        $insertData = [];
         foreach ($cities as $city) {
-            $state = State::where('code', $city['state_code'])->first();
-            City::create([
-                'uid' => Str::uuid(),
+            // Check if state and country exist
+            if (!isset($states[$city['state_code']])) {
+                Log::warning("State with code {$city['state_code']} not found for city {$city['name']}");
+                continue;
+            }
+            if (!isset($countries[$city['country_code']])) {
+                Log::warning("Country with code {$city['country_code']} not found for city {$city['name']}");
+                continue;
+            }
+
+            $insertData[] = [
+                'uid' => (string) Str::uuid(),
                 'name' => $city['name'],
-                'stateId' => $state->uid,
-            ]);
+                'stateId' => $states[$city['state_code']],
+                'countryId' => $countries[$city['country_code']],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        // Bulk insert for efficiency
+        if (!empty($insertData)) {
+            City::insert($insertData);
         }
     }
 }
