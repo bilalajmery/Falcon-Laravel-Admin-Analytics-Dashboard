@@ -182,6 +182,9 @@
                 <li class="nav-item nav-item-subType d-none"><a class="nav-link" href="/subType">Sub Types</a></li>
                 <li class="nav-item nav-item-make d-none"><a class="nav-link" href="/make">Makes</a></li>
                 <li class="nav-item nav-item-model d-none"><a class="nav-link" href="/model">Models</a></li>
+                <li class="nav-item nav-item-country d-none"><a class="nav-link" href="/country">Countries</a></li>
+                <li class="nav-item nav-item-state d-none"><a class="nav-link" href="/state">States</a></li>
+                <li class="nav-item nav-item-city d-none"><a class="nav-link" href="/city">Cities</a></li>
                 <li class="nav-item nav-item-role d-none"><a class="nav-link" href="/role">Roles</a></li>
                 <li class="nav-item nav-item-employee d-none"><a class="nav-link" href="/employee">Employee</a></li>
                 <li class="nav-item nav-item-setting"><a class="nav-link" href="/setting">Setting</a></li>
@@ -284,6 +287,33 @@
                     </a>
                 </li>
 
+                <li class="nav-item nav-item-country d-none">
+                    <a class="nav-link" href="/country" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><i class="fas fa-globe"></i></span>
+                            <span class="nav-link-text ps-1">Countries</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-item-state d-none">
+                    <a class="nav-link" href="/state" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><i class="fas fa-map"></i></span>
+                            <span class="nav-link-text ps-1">States</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-item-city d-none">
+                    <a class="nav-link" href="/city" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><i class="fas fa-map-pin"></i></span>
+                            <span class="nav-link-text ps-1">Cities</span>
+                        </div>
+                    </a>
+                </li>
+
                 <li class="nav-item nav-item-role d-none">
                     <a class="nav-link" href="/role" role="button">
                         <div class="d-flex align-items-center">
@@ -335,10 +365,12 @@
             <li class="nav-item nav-item-subType d-none"><a class="nav-link" href="/subType">Sub Types</a></li>
             <li class="nav-item nav-item-make d-none"><a class="nav-link" href="/make">Makes</a></li>
             <li class="nav-item nav-item-model d-none"><a class="nav-link" href="/model">Models</a></li>
+            <li class="nav-item nav-item-country d-none"><a class="nav-link" href="/country">Countries</a></li>
+            <li class="nav-item nav-item-state d-none"><a class="nav-link" href="/state">States</a></li>
+            <li class="nav-item nav-item-city d-none"><a class="nav-link" href="/city">Cities</a></li>
             <li class="nav-item nav-item-role d-none"><a class="nav-link" href="/role">Roles</a></li>
             <li class="nav-item nav-item-employee d-none"><a class="nav-link" href="/employee">Employee</a></li>
             <li class="nav-item nav-item-setting"><a class="nav-link" href="/setting">Setting</a></li>
-
 
         </ul>
     </div>

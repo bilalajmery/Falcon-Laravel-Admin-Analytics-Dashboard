@@ -13,6 +13,9 @@ use App\Http\Controllers\settingController;
 use App\Http\Controllers\subCategoryController;
 use App\Http\Controllers\subTypeController;
 use App\Http\Controllers\typeController;
+use App\Http\Controllers\countryController;
+use App\Http\Controllers\stateController;
+use App\Http\Controllers\cityController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['alreadyLogin', 'preventBackHistory', 'rememberMe', 'handleServerError', 'storeRequestLogs']], function () {
@@ -60,6 +63,15 @@ Route::group(['middleware' => ['loginCheck', 'handleServerError', 'preventBackHi
     Route::resource('model', modelController::class);
     Route::patch('model/{uid}/status', [modelController::class, 'status']);
 
+    Route::resource('country', countryController::class);
+    Route::patch('country/{uid}/status', [countryController::class, 'status']);
+
+    Route::resource('state', stateController::class);
+    Route::patch('state/{uid}/status', [stateController::class, 'status']);
+
+    Route::resource('city', cityController::class);
+    Route::patch('city/{uid}/status', [cityController::class, 'status']);
+
     Route::resource('role', roleController::class);
     Route::patch('role/{uid}/status', [roleController::class, 'status']);
     Route::get('role/permission/{uid}', [roleController::class, 'permission']);
@@ -83,3 +95,6 @@ Route::get('/common/type', [commonController::class, 'type']);
 Route::get('/common/make', [commonController::class, 'make']);
 Route::get('/common/role', [commonController::class, 'role']);
 Route::get('/common/sidebar', [commonController::class, 'sidebar']);
+Route::get('/common/country', [commonController::class, 'country']);
+Route::get('/common/state', [commonController::class, 'state']);
+Route::get('/common/city', [commonController::class, 'city']);

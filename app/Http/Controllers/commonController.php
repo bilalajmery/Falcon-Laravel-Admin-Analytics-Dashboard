@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\commonFunction;
-
-use App\Models\Admin;
-use App\Models\Category;
-use App\Models\Make;
-use App\Models\Role;
-use App\Models\Type;
+use Illuminate\Http\Request;
+use App\Models\{Admin, Category, Make, Role, Type, Country, State, City};
 use Illuminate\Support\Facades\Session;
 
 class commonController extends commonFunction
@@ -72,6 +68,42 @@ class commonController extends commonFunction
                 ->first();
 
             return response()->json(['error' => false, 'admin' => $admin]);
+
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function country()
+    {
+        try {
+
+            $country = Country::get();
+            return response()->json(['error' => false, 'country' => $country]);
+
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function state(Request $request)
+    {
+        try {
+
+            $state = State::where('countryId', $request->countryId)->get();
+            return response()->json(['error' => false, 'state' => $state]);
+
+        } catch (\Throwable $th) {
+            return $this->tryCatchResponse($th);
+        }
+    }
+
+    public function city(Request $request)
+    {
+        try {
+
+            $city = City::where('stateId', $request->stateId)->get();
+            return response()->json(['error' => false, 'city' => $city]);
 
         } catch (\Throwable $th) {
             return $this->tryCatchResponse($th);

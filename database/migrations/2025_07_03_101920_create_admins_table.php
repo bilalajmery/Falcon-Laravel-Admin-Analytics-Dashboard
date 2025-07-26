@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id('adminId')->comment('Primary key for admin');
             $table->uuid('uid')->unique()->comment('Universally unique identifier for admin');
-            $table->uuid('roleId')->default(null)->comment('UUID of the role');
+            $table->uuid('roleId')->nullable()->comment('UUID of the role');
 
             $table->string('name', 100)->index()->comment('Full name of the admin');
             $table->string('email')->unique()->comment('Unique email address of the admin');
